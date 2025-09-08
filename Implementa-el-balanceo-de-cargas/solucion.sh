@@ -23,8 +23,16 @@ do
     --machine-type=e2-small \
     --image-family=debian-11 \
     --image-project=debian-cloud \
-    --metadata=startup-script='#!/bin/bash apt-get update apt-get install apache2 -y service apache2 restart echo "<h3>Web Server: web'$i'</h3>" | tee /var/www/html/index.html'
+    --metadata=startup-script='#!/bin/bash 
+    apt-get update
+    apt-get install apache2 -y
+    service apache2 restart
+    echo "
+    <h3>Web Server: web'$i'
+    </h3>" | tee /var/www/html/index.html'
 done
+echo "Esperando 60 segundos para que las instancias se inicien..."
+sleep 60
 
 echo "Creando la regla de firewall para el balanceador de carga de red..."
 gcloud compute firewall-rules create www-firewall-network-lb \
@@ -45,6 +53,9 @@ echo "Agregando las instancias al grupo de destino..."
 gcloud compute target-pools add-instances www-pool \
   --instances web1,web2,web3 \
   --instances-zone=$ZONE
+
+echo "Agregando una pausa para que el balanceador de carga pueda verificar la salud de las instancias..."
+sleep 30
 
 echo "Agregando la regla de reenvío..."
 gcloud compute forwarding-rules create www-rule \
