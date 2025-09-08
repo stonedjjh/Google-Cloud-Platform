@@ -319,23 +319,35 @@ curl http://$(echo $ip_reservada_premium)
 ```
 ---
 ## Solución automatizada
+También puedes resolver este laboratorio ejecutando un script de automatización en tu entorno de Cloud Shell. Este archivo contiene todos los comandos de gcloud en orden para crear la infraestructura.
 
-También puedes resolver este laboratorio ejecutando el siguiente script en tu entorno de Cloud Shell. Este archivo contiene todos los comandos de gcloud en orden y automatiza la creación de la infraestructura.
+Pasos para ejecutar el script
+Crear el archivo del script:
+En Cloud Shell, ejecuta el siguiente comando para crear un archivo vacío llamado solucion.sh:
 
-Cómo usar el script solucion.sh
-Para recrear la infraestructura de este laboratorio de manera automática, sigue estos pasos:
+```Bash
+touch solucion.sh
+```
 
-Guarda el script: Copia el código de solucion.sh y guárdalo en la raíz de tu carpeta.
+Abrir el Editor de Código:
+Haz clic en Open Editor en la parte superior derecha de tu terminal de Cloud Shell. En el menú de la izquierda, selecciona el archivo solucion.sh que acabas de crear.
 
-Define tus variables: Asegúrate de que las variables REGION y ZONE en el script estén configuradas con los valores correctos de tu laboratorio.
+Pegar el contenido:
+Copia el código completo del script solucion.sh y pégalo en el editor. Luego, guarda el archivo.
 
-Haz el archivo ejecutable: En tu Cloud Shell, usa el siguiente comando para darle permisos de ejecución al script:
+Hacer el archivo ejecutable:
+Regresa a la terminal y otorga permisos de ejecución al script con el siguiente comando:
 
 ```Bash
 chmod +x solucion.sh
 ```
-Ejecuta el script: Inicia el proceso con el siguiente comando:
+
+Ejecutar el script:
+Para ejecutar el script y asegurarte de que las variables de entorno se mantengan en tu sesión de Cloud Shell, usa el comando source o el punto (.).
 
 ```Bash
-./solucion.sh
+source ./solucion.sh
+# O
+. ./solucion.sh
 ```
+El script ahora se ejecutará, y la infraestructura del laboratorio será creada automáticamente.
