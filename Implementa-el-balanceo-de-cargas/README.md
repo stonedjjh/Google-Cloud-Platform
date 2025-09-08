@@ -317,3 +317,25 @@ Para probar que el balanceador de carga está funcionando correctamente y que la
 ```bash
 curl http://$(echo $ip_reservada_premium)
 ```
+---
+## Solución automatizada
+
+También puedes resolver este laboratorio ejecutando el siguiente script en tu entorno de Cloud Shell. Este archivo contiene todos los comandos de gcloud en orden y automatiza la creación de la infraestructura.
+
+Cómo usar el script solucion.sh
+Para recrear la infraestructura de este laboratorio de manera automática, sigue estos pasos:
+
+Guarda el script: Copia el código de solucion.sh y guárdalo en la raíz de tu carpeta.
+
+Define tus variables: Asegúrate de que las variables REGION y ZONE en el script estén configuradas con los valores correctos de tu laboratorio.
+
+Haz el archivo ejecutable: En tu Cloud Shell, usa el siguiente comando para darle permisos de ejecución al script:
+
+```Bash
+chmod +x solucion.sh
+```
+Ejecuta el script: Inicia el proceso con el siguiente comando:
+
+```Bash
+./solucion.sh
+```
