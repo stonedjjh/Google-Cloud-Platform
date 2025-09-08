@@ -74,7 +74,16 @@ gcloud compute instance-templates create lb-backend-template \
   --machine-type=e2-medium \
   --image-family=debian-11 \
   --image-project=debian-cloud \
-  --metadata=startup-script='#!/bin/bash apt-get update apt-get install apache2 -y a2ensite default-ssl a2enmod ssl vm_hostname="$(curl -H "Metadata-Flavor:Google" http://169.254.169.254/computeMetadata/v1/instance/name)" echo "Page served from: $vm_hostname" | tee /var/www/html/index.html systemctl restart apache2'
+  --metadata=startup-script='#!/bin/bash
+apt-get update
+apt-get install apache2 -y
+a2ensite default-ssl
+a2enmod ssl
+vm_hostname="$(curl -H "Metadata-Flavor:Google" \
+http://169.254.169.254/computeMetadata/v1/instance/name)"
+echo "Page served from: $vm_hostname" | \
+tee /var/www/html/index.html
+systemctl restart apache2'
 
 echo "Creando el grupo de instancias administrado..."
 gcloud compute instance-groups managed create lb-backend-group \
