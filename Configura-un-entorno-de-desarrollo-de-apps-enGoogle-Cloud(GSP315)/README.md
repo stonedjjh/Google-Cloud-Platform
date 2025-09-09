@@ -282,22 +282,36 @@ gcloud projects remove-iam-policy-binding $PROJECT_ID \
     --role='roles/viewer'
 ```
 ---
-Solución automatizada
+## Solución automatizada
 También puedes resolver este laboratorio ejecutando un script de automatización en tu entorno de Cloud Shell. Este archivo contiene todos los comandos de gcloud en orden para crear la infraestructura.
 
-Pasos para ejecutar el script Crear el archivo del script: En Cloud Shell, ejecuta el siguiente comando para crear un archivo vacío llamado solucion.sh:
+Pasos para ejecutar el script
+Crear el archivo del script:
+En Cloud Shell, ejecuta el siguiente comando para crear un archivo vacío llamado solucion.sh:
 
+```Bash
 touch solucion.sh
-Abrir el Editor de Código: Haz clic en Open Editor en la parte superior derecha de tu terminal de Cloud Shell. En el menú de la izquierda, selecciona el archivo solucion.sh que acabas de crear.
+```
 
-Pegar el contenido: Copia el código completo del script solucion.sh y pégalo en el editor. Luego, guarda el archivo.
+Abrir el Editor de Código:
+Haz clic en Open Editor en la parte superior derecha de tu terminal de Cloud Shell. En el menú de la izquierda, selecciona el archivo solucion.sh que acabas de crear.
 
-Hacer el archivo ejecutable: Regresa a la terminal y otorga permisos de ejecución al script con el siguiente comando:
+Pegar el contenido:
+Copia el código completo del script solucion.sh y pégalo en el editor. Luego, guarda el archivo.
 
+Hacer el archivo ejecutable:
+Regresa a la terminal y otorga permisos de ejecución al script con el siguiente comando:
+
+```Bash
 chmod +x solucion.sh
-Ejecutar el script: Para ejecutar el script y asegurarte de que las variables de entorno se mantengan en tu sesión de Cloud Shell, usa el comando source o el punto (.).
+```
 
+Ejecutar el script:
+Para ejecutar el script y asegurarte de que las variables de entorno se mantengan en tu sesión de Cloud Shell, usa el comando source o el punto (.).
+
+```Bash
 source ./solucion.sh
 # O
 . ./solucion.sh
+```
 El script ahora se ejecutará, y la infraestructura del laboratorio será creada automáticamente.
