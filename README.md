@@ -13,6 +13,7 @@ Cada carpeta corresponde a un reto, práctica o solución implementada en GCP. D
 
 - [`Implementa el balanceo de cargas`](./Implementa-el-balanceo-de-cargas)  
   Configuración de un **Load Balancer** en GCP para distribuir el tráfico entre múltiples instancias, asegurando alta disponibilidad y escalabilidad.
+- [`Configura un entorno de desarrollo de apps en Google Cloud`](./Configura-un-entorno-de-desarrollo-de-apps-enGoogle-Cloud(GSP315))  
 
 *(La lista se irá ampliando conforme agregue más soluciones.)*
 
