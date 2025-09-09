@@ -42,9 +42,9 @@ Estas son algunas pautas de Jooli Inc. que debes seguir:
 A continuación, se describe cada tarea en detalle. ¡Buena suerte!
 
 ```bash
-export REGION=us-east4
+export REGION=<ingresa la region del lab>
 
-export ZONE=us-east4-b
+export ZONE=<ingresa la zona del lab>
 
 gcloud config set compute/region $REGION
 
@@ -53,9 +53,9 @@ gcloud config set compute/zone $ZONE
 export PROJECT_ID=$(gcloud config list --format="value(core.project)")
 export numeroProject=$(gcloud projects describe $PROJECT_ID --format="value(projectNumber)")
 export mi_bucket=$PROJECT_ID-bucket
-export mi_tema=topic-memories-998
-export mi_nombre_funcion=memories-thumbnail-maker
-export ingeniero2=student-04-267b7e2900ec@qwiklabs.net
+export mi_tema=<ingresa el nombre del topico dado en el lab>
+export mi_nombre_funcion=<ingresa el nombre de la funcion dado en el lab>
+export ingeniero2=<ingresa el email del usaurio 2 dado en el lab>
 
 gcloud services enable \
     run.googleapis.com \
@@ -222,11 +222,11 @@ aqui debemos abrir el editor de la consola y copiar lo script en sus archivos co
 npm install
 
 gcloud projects add-iam-policy-binding $PROJECT_ID \
-    --member="serviceAccount:service-$NUMERO_PROJECT@gcp-sa-pubsub.iam.gserviceaccount.com" \
+    --member="serviceAccount:service-$numeroProject@gcp-sa-pubsub.iam.gserviceaccount.com" \
     --role='roles/pubsub.publisher'
 
 gcloud projects add-iam-policy-binding $PROJECT_ID \
-    --member="serviceAccount:$NUMERO_PROJECT@cloudservices.gserviceaccount.com" \
+    --member="serviceAccount:$numeroProject@cloudservices.gserviceaccount.com" \
     --role='roles/pubsub.publisher'
 
 
@@ -237,17 +237,17 @@ for i in {1..3}; do
   # Otorgar permisos críticos a la cuenta de servicio de Cloud Storage en cada intento puede fallar las 
   # primeras veces no te preocupes
   gcloud projects add-iam-policy-binding $PROJECT_ID \
-    --member="serviceAccount:service-$NUMERO_PROJECT@gs-project-accounts.iam.gserviceaccount.com" \
+    --member="serviceAccount:service-$numeroProject@gs-project-accounts.iam.gserviceaccount.com" \
     --role='roles/iam.serviceAccountUser' \
     --role='roles/pubsub.publisher'
 
-  gcloud functions deploy $MI_NOMBRE_FUNCION \
+  gcloud functions deploy $mi_nombre_funcion \
     --gen2 \
     --runtime=nodejs22 \
     --region=$REGION \
     --source=gcf \
-    --entry-point=$MI_NOMBRE_FUNCION \
-    --trigger-bucket=$MI_BUCKET \
+    --entry-point=$mi_nombre_funcion \
+    --trigger-bucket=$mi_bucket \
     --allow-unauthenticated
 
   if [ $? -eq 0 ]; then
