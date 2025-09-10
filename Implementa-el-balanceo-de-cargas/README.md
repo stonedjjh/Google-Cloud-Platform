@@ -81,13 +81,19 @@ creamos las instancias([referencia](https://cloud.google.com/sdk/gcloud/referenc
 ```bash
 for i in 1 2 3
 do
-	gcloud compute instances create web$i \
-	--zone=$ZONE \
-	--tags=network-lb-tag \
-	--machine-type=e2-small \
-	--image-family=debian-11 \
-	--image-project=debian-cloud \
-	--metadata=startup-script='#!/bin/bash apt-get update apt-get install apache2 -y service apache2 restart echo "<h3>Web Server: web'$i'</h3>" | tee /var/www/html/index.html'
+  gcloud compute instances create web$i \
+    --zone=$ZONE \
+    --tags=network-lb-tag \
+    --machine-type=e2-small \
+    --image-family=debian-11 \
+    --image-project=debian-cloud \
+    --metadata=startup-script='#!/bin/bash 
+    apt-get update
+    apt-get install apache2 -y
+    service apache2 restart
+    echo "
+    <h3>Web Server: web'$i'
+    </h3>" | tee /var/www/html/index.html'
 done
 ```
   
