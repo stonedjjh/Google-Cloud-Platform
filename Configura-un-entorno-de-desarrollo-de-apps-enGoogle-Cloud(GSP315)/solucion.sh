@@ -137,6 +137,10 @@ cat > package.json << EOF
 }
 EOF
 
+# Instalar las dependencias
+echo "Instalando dependencias de Node.js..."
+npm install
+
 # Volver al directorio padre para el despliegue
 cd ..
 
