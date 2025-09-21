@@ -7,7 +7,8 @@
 Supongamos que eres consultor de seguridad y que Julio, el dueño de una pequeña empresa local, te contrata para que lo ayudes con su exitoso sitio web (juice-shop). Julio es nuevo en Google Cloud y le pidió al hijo de su vecino que configurara el sitio inicial. Desde entonces, el hijo del vecino se encuentra en la universidad, pero antes de irse se aseguró de dejar el sitio en funcionamiento.
 
 A continuación, se muestra la configuración actual:
-![alt text](image.png)
+![configuración actual](./image/inicial.png)
+
 
 ### Tu desafío
 
@@ -26,11 +27,11 @@ Sé específico y limita el tamaño de los rangos de origen de las reglas del fi
 Los accesos demasiado permisivos se considerarán incorrectos.
 
 El entorno de Google Cloud que se va a configurar
-![alt text](image-1.png)
+![configuración deseada](./image/final.png)
 
-export PROJECTID=qwiklabs-gcp-02-0dee3ede4f43
-export ZONE=us-central1-f
-export REGION=us-central1
+export PROJECTID=<Ingrese el ID del proyecto>
+export ZONE=<Ingrese la zona del lab>
+export REGION=<Ingrese la región del lab>
 
 Orden de acción sugerido.
 
