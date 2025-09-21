@@ -29,10 +29,6 @@ Los accesos demasiado permisivos se considerarán incorrectos.
 El entorno de Google Cloud que se va a configurar
 ![configuración deseada](./image/final.png)
 
-export PROJECTID=<Ingrese el ID del proyecto>
-export ZONE=<Ingrese la zona del lab>
-export REGION=<Ingrese la región del lab>
-
 Orden de acción sugerido.
 
 1. Revisa las reglas del firewall. Quita las reglas demasiado permisivas.
@@ -52,8 +48,25 @@ La red predeterminada se rellena previamente con reglas de cortafuegos que permi
 Para manipular las reglas de firewall podemos ir a su [documentación](https://cloud.google.com/sdk/gcloud/reference/compute/firewall-rules)
 
 ```bash 
+# Las siguientes variables son necesarias para todos los comandos del lab
+# El ID del proyecto se encuentra en la página principal del lab
+export PROJECT_ID=<Ingrese el ID del proyecto>
+
+# La zona también se encuentran en la página principal
+export ZONE=<Ingrese la zona del lab>
+
+#esta variable no la da el lab pero con la zona se intuye la Region
+export REGION=<Ingrese la región del lab>
+
+#podemos listar las reglas de firewall con el siguiente comando
+gcloud compute firewall-rules list
+
+# Este comando cumple con el primer paso 
 gcloud compute firewall-rules delete open-access --quiet
-gcloud compute firewall-rules delete default-allow-internal default-allow-rdp default-allow-icmp
+# Pero interpretando lo que piden aplicando el principio de 
+# minimo privilegio y viendo que luego crearemos las reglas
+# necesarias creo que deberiamos eliminar todas
+gcloud compute firewall-rules delete default-allow-internal default-allow-rdp default-allow-icmp default-allow-ssh --quiet
 ```
 
 2. Navega a Compute Engine en la consola de Cloud e identifica el host de bastión. La instancia no debe estar en ejecución. Inicia la instancia.
@@ -69,7 +82,7 @@ gcloud compute instances start bastion --zone=${ZONE}
 ```bash
 export SSH_IAP_NETWORK_TAG=<coloque el nombre dado en el lab>
 gcloud compute firewall-rules create ${SSH_IAP_NETWORK_TAG}\
-    --allow=TCP:22\ 
+    --allow=TCP:22\
     --source-ranges=35.235.240.0/20\
     --priority=1000\
     --network=acme-vpc\
@@ -135,7 +148,17 @@ gcloud compute instances add-tags juice-shop\
 
 
 ```bash 
+# Conéctate al host bastion a través de Cloud Shell
 gcloud compute ssh bastion --zone=${ZONE}
-ssh juice-shop@<IP_INTERNA>
+
+# Desde el bastion, intenta conectarte a la instancia de juice-shop
+# Esto falla con un error de "Permission denied"
+ssh juice-shop
+
+# Solución temporal: Usa la consola de Google Cloud
+# 1. Ve a Compute Engine > VM instances
+# 2. En la fila de la instancia de "bastion", haz clic en SSH
+# 3. En la nueva ventana, ejecuta el comando de conexión a juice-shop
+ssh juice-shop
 ```
 
