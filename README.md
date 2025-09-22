@@ -11,9 +11,14 @@ El objetivo es consolidar conocimientos, aplicar buenas prácticas y compartir e
 
 Cada carpeta corresponde a un reto, práctica o solución implementada en GCP. Dentro encontrarás los pasos, código y configuraciones necesarias.  
 
-- [`Implementa el balanceo de cargas`](./Implementa-el-balanceo-de-cargas)  
+- [`Implementa el balanceo de cargas`](./(GSP313)Implementa-el-balanceo-de-cargas/)  
   Configuración de un **Load Balancer** en GCP para distribuir el tráfico entre múltiples instancias, asegurando alta disponibilidad y escalabilidad.
-- [`Configura un entorno de desarrollo de apps en Google Cloud`](./Configura-un-entorno-de-desarrollo-de-apps-enGoogle-Cloud(GSP315))  
+- [`Configura un entorno de desarrollo de apps en Google 
+Cloud`](./(GSP315)Configura-un-entorno-de-desarrollo-de-apps-enGoogle-Cloud/)  
+  Configuración de las herramientas y servicios esenciales de Google Cloud para crear un entorno de desarrollo robusto y eficiente.
+- [`Red de Google Cloud segura`](./(GSP322)Red-de-Google-Cloud-segura/)
+  Diseño e implementación de una red en Google Cloud con políticas de seguridad, reglas de firewall y controles de acceso para proteger los recursos y el tráfico. 
+
 
 *(La lista se irá ampliando conforme agregue más soluciones.)*
 

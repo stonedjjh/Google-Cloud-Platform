@@ -120,7 +120,7 @@ functions.cloudEvent('$mi_nombre_funcion', async cloudEvent => {
   const bucketName = event.bucket;
   const size = "64x64";
   const bucket = new Storage().bucket(bucketName);
-  const topicName = "$mi_tema$";
+  const topicName = $mi_tema$;
   const pubsub = new PubSub();
 
   if (fileName.search("64x64_thumbnail") === -1) {
@@ -245,7 +245,7 @@ for i in {1..3}; do
     --gen2 \
     --runtime=nodejs22 \
     --region=$REGION \
-    --source=. \
+    --source=gcf \
     --entry-point=$mi_nombre_funcion \
     --trigger-bucket=$mi_bucket \
     --allow-unauthenticated

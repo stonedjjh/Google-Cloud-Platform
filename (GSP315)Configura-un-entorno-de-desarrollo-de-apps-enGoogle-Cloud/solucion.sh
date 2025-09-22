@@ -137,10 +137,6 @@ cat > package.json << EOF
 }
 EOF
 
-# Instalar las dependencias
-echo "Instalando dependencias de Node.js..."
-npm install
-
 # Volver al directorio padre para el despliegue
 cd ..
 
@@ -171,7 +167,7 @@ for i in {1..3}; do
     --gen2 \
     --runtime=nodejs22 \
     --region=$REGION \
-    --source=gcf \
+    --source=gfc. \
     --entry-point=$MI_NOMBRE_FUNCION \
     --trigger-bucket=$MI_BUCKET \
     --allow-unauthenticated
