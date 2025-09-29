@@ -9,7 +9,6 @@ Supongamos que eres consultor de seguridad y que Julio, el dueño de una pequeñ
 A continuación, se muestra la configuración actual:
 ![configuración actual](./image/inicial.png)
 
-
 ### Tu desafío
 
 Debes crear la configuración de seguridad adecuada para el sitio de Julio. Tu primer desafío consiste en configurar las reglas del firewall y las etiquetas de instancias de máquina virtual. Además, debes asegurarte de que el acceso SSH esté disponible únicamente al host de bastión a través de IAP.
@@ -47,7 +46,7 @@ La red predeterminada se rellena previamente con reglas de cortafuegos que permi
 
 Para manipular las reglas de firewall podemos ir a su [documentación](https://cloud.google.com/sdk/gcloud/reference/compute/firewall-rules)
 
-```bash 
+```bash
 # Las siguientes variables son necesarias para todos los comandos del lab
 # El ID del proyecto se encuentra en la página principal del lab
 export PROJECT_ID=<Ingrese el ID del proyecto>
@@ -96,7 +95,7 @@ ahora hay que agregar la etiqueta al recurso pertinente [documentación](https:/
 gcloud compute instances add-tags bastion\
     --zone ${ZONE}\
     --tags ${SSH_IAP_NETWORK_TAG}
-```    
+```
 
 4. El servidor juice-shop entrega tráfico HTTP. Crea una regla de firewall que permita el tráfico en HTTP (tcp/80) a cualquier dirección. La regla de firewall se debe habilitar para la instancia de juice-shop mediante una etiqueta de red de HTTP network tag.
 
@@ -117,13 +116,11 @@ igual que en el paso anterior agregamos la etiqueta al recurso pertinente
 gcloud compute instances add-tags juice-shop\
     --zone ${ZONE}\
     --tags ${HTTP_NETWORK_TAG}
-```    
+```
 
 5. Debes conectarte a juice-shop desde el host de bastión mediante SSH. Crea una regla de firewall que permita el tráfico mediante SSH (tcp/22) desde la dirección de red acme-mgmt-subnet. La regla de firewall se debe habilitar para la instancia de juice-shop mediante una etiqueta de red de SSH internal network tag.
 
-
 Este paso presenta un problema, es que no conocemos el rango de ip del la subnet de acme-mgmt-subnet por lo cual tenemos que hallarlo [documentacion](https://cloud.google.com/sdk/gcloud/reference/compute/networks/subnets)
-
 
 ```bash
 export IPCIDRRANGE=$(gcloud compute networks subnets describe acme-mgmt-subnet\
@@ -146,10 +143,10 @@ gcloud compute instances add-tags juice-shop\
 
 6. En la página de instancias de Compute Engine, haz clic en el botón SSH para conectarte al host de bastión. Una vez que te conectes, permite el acceso SSH a juice-shop. [Documentación](https://cloud.google.com/sdk/gcloud/reference/compute/ssh)
 
-
-```bash 
-# Conéctate al host bastion a través de Cloud Shell
+```bash
 gcloud compute ssh bastion --zone=${ZONE}
+
+gcloud compute ssh juice-shop --zone=${ZONE} --tunnel-through-iap
 
 # Desde el bastion, intenta conectarte a la instancia de juice-shop
 # Esto falla con un error de "Permission denied"
@@ -161,4 +158,3 @@ ssh juice-shop
 # 3. En la nueva ventana, ejecuta el comando de conexión a juice-shop
 ssh juice-shop
 ```
-
