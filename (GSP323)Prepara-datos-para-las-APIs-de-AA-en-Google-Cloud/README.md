@@ -16,36 +16,35 @@ Se recomienda este lab a los estudiantes que se inscribieron en la insignia de h
 
 Temas evaluados:
 
--   Crear un trabajo simple de Dataproc
--   Crear un trabajo simple de Dataflow
--   Realizar dos tareas de APIs respaldadas por el aprendizaje automático de Google
-
-
+- Crear un trabajo simple de Dataproc
+- Crear un trabajo simple de Dataflow
+- Realizar dos tareas de APIs respaldadas por el aprendizaje automático de Google
 
 ### Verifica los permisos del proyecto
 
 Antes de comenzar a trabajar en Google Cloud, asegúrate de que tu proyecto tenga los permisos correctos en Identity and Access Management (IAM).
 
 1.  En la consola de Google Cloud, en el  **Menú de navegación**, selecciona  **IAM y administración**  >  **IAM**.
-    
-2.  Confirma que aparezca la cuenta de servicio predeterminada de Compute  `{project-number}-compute@developer.gserviceaccount.com`  con los roles  `editor`  y  `storage.admin`  asignados. El prefijo de la cuenta es el número del proyecto, que puedes encontrar en el  **Menú de navegación > Descripción general de Cloud > Panel**.    
 
-> [! NOTE]
-> **Nota:** Si la cuenta no aparece en IAM o no tiene asignado el rol  `storage.admin`, sigue los pasos que se indican a continuación para asignar el rol necesario.
+2.  Confirma que aparezca la cuenta de servicio predeterminada de Compute  `{project-number}-compute@developer.gserviceaccount.com`  con los roles  `editor`  y  `storage.admin`  asignados. El prefijo de la cuenta es el número del proyecto, que puedes encontrar en el  **Menú de navegación > Descripción general de Cloud > Panel**.
 
-1.  En la consola de Google Cloud, en el  **menú de navegación**, haz clic en  **Descripción general de Cloud > Panel**.
-2.  Copia el número del proyecto (p. ej.,  `729328892908`).
-3.  En el  **Menú de navegación**, selecciona  **IAM y administración**  >  **IAM**.
-4.  En la parte superior de la tabla de funciones, debajo de  **Ver por principales**, haz clic en  **Otorgar acceso**.
-5.  En  **Principales nuevas**, escribe lo siguiente:
+> [!NOTE]
+  **Nota:** Si la cuenta no aparece en IAM o no tiene asignado el rol  `storage.admin`, sigue los pasos que se indican a continuación para asignar el rol necesario.
+  
 
-  {project-number}-compute@developer.gserviceaccount.com
+1. En la consola de Google Cloud, en el  **menú de navegación**, haz clic en  **Descripción general de Cloud > Panel**.
+2. Copia el número del proyecto (p. ej.,  `729328892908`).
+3. En el  **Menú de navegación**, selecciona  **IAM y administración**  >  **IAM**.
+4. En la parte superior de la tabla de funciones, debajo de  **Ver por principales**, haz clic en  **Otorgar acceso**.
+5. En  **Principales nuevas**, escribe lo siguiente:
+
+{project-number}-compute@developer.gserviceaccount.com
 
 Se copió correctamente
 
-6.  Reemplaza  `{project-number}`  por el número de tu proyecto.
-7.  En  **Rol**, selecciona  **Administrador de almacenamiento**.
-8.  Haz clic en  **Guardar**.
+6. Reemplaza  `{project-number}`  por el número de tu proyecto.
+7. En  **Rol**, selecciona  **Administrador de almacenamiento**.
+8. Haz clic en  **Guardar**.
 
 ## Situación del desafío
 
@@ -59,22 +58,19 @@ En esta tarea, usarás la plantilla por lotes de Dataflow  **Text Files on Cloud
 
 Asegúrate de haber hecho lo siguiente:
 
--   Crea un conjunto de datos de BigQuery llamado  `BigQuery Dataset Name`  con una tabla llamada  `Output Table Name`.
--   Crea un bucket de Cloud Storage llamado  `Cloud Storage Bucket Name`.
-
-
+- Crea un conjunto de datos de BigQuery llamado  `BigQuery Dataset Name`  con una tabla llamada  `Output Table Name`.
+- Crea un bucket de Cloud Storage llamado  `Cloud Storage Bucket Name`.
 
 |Campo|Valor|
 | --|--|
-|Archivos de entrada de Cloud Storage  | `gs://spls/gsp323/lab.csv` | 
-|Ubicación en Cloud Storage del archivo de esquema de BigQuery  | `gs://spls/gsp323/lab.schema` | 
-|Tabla de salida de BigQuery  | `Output Table Name` | 
-|Directorio temporal para el proceso de carga de BigQuery  | `Temporary BigQuery Directory` | 
-|Ubicación temporal  | `Temporary Location` | 
-|Parámetros opcionales > Ruta de acceso de UDF de JavaScript en Cloud Storage  | `gs://spls/gsp323/lab.js` | 
-|Parámetros opcionales > Nombre de UDF de JavaScript  | `transform` | 
-|Parámetros opcionales > Tipo de máquina  | `e2-standard-2` | 
-
+|Archivos de entrada de Cloud Storage  | `gs://spls/gsp323/lab.csv` |
+|Ubicación en Cloud Storage del archivo de esquema de BigQuery  | `gs://spls/gsp323/lab.schema` |
+|Tabla de salida de BigQuery  | `Output Table Name` |  
+|Directorio temporal para el proceso de carga de BigQuery  | `Temporary BigQuery Directory` |  
+|Ubicación temporal  | `Temporary Location` |  
+|Parámetros opcionales > Ruta de acceso de UDF de JavaScript en Cloud Storage  | `gs://spls/gsp323/lab.js` |  
+|Parámetros opcionales > Nombre de UDF de JavaScript  | `transform` |  
+|Parámetros opcionales > Tipo de máquina  | `e2-standard-2` |  
 
 ## Tarea 2: Ejecuta un trabajo simple de Dataproc
 
@@ -103,13 +99,12 @@ Ejecuta un trabajo de Dataproc con los valores que se indican a continuación.
 
 ## Tarea 3: Usa la API de Google Cloud Speech-to-Text
 
--   Usa la API de Google Cloud Speech-to-Text para analizar el archivo de audio  `gs://spls/gsp323/task3.flac`. Cuando hayas analizado el archivo, sube el archivo resultante aquí:  `Cloud Speech Location`
+- Usa la API de Google Cloud Speech-to-Text para analizar el archivo de audio  `gs://spls/gsp323/task3.flac`. Cuando hayas analizado el archivo, sube el archivo resultante aquí:  `Cloud Speech Location`
 
 **Nota:**  Si esta tarea te genera problemas, puedes consultar el lab respectivo para solucionarlos:  [API de Google Cloud Speech-to-Text: Qwik Start](https://www.cloudskillsboost.google/catalog_lab/743)
 
-
 ## Tarea 4: Usa la API de Cloud Natural Language
 
--   Usa la API de Cloud Natural Language para analizar la oración del texto sobre Odín. El texto que debes analizar es el siguiente: “Old Norse texts portray Odin as one-eyed and long-bearded, frequently wielding a spear named Gungnir and wearing a cloak and a broad hat”. Cuando hayas analizado el texto, sube el archivo resultante aquí:  `Cloud Natural Language Location`
+- Usa la API de Cloud Natural Language para analizar la oración del texto sobre Odín. El texto que debes analizar es el siguiente: “Old Norse texts portray Odin as one-eyed and long-bearded, frequently wielding a spear named Gungnir and wearing a cloak and a broad hat”. Cuando hayas analizado el texto, sube el archivo resultante aquí:  `Cloud Natural Language Location`
 
 **Nota:**  Si esta tarea te genera problemas, puedes consultar el lab respectivo para solucionarlos:  [API de Cloud Natural Language: Qwik Start](https://www.cloudskillsboost.google/catalog_lab/709)
