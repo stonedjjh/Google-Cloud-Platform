@@ -24,18 +24,12 @@ Temas evaluados:
 
 Antes de comenzar a trabajar en Google Cloud, asegúrate de que tu proyecto tenga los permisos correctos en Identity and Access Management (IAM).
 
-1.  En la consola de Google Cloud, en el  **Menú de navegación**, selecciona  **IAM y administración**  >  **IAM**.
+1. En la consola de Google Cloud, en el  **Menú de navegación**, selecciona  **IAM y administración**  >  **IAM**.
 
-2.  Confirma que aparezca la cuenta de servicio predeterminada de Compute  `{project-number}-compute@developer.gserviceaccount.com`  con los roles  `editor`  y  `storage.admin`  asignados. El prefijo de la cuenta es el número del proyecto, que puedes encontrar en el  **Menú de navegación > Descripción general de Cloud > Panel**.
-
-
-2.  Confirma que aparezca la cuenta de servicio predeterminada de Compute  `{project-number}-compute@developer.gserviceaccount.com`  con los roles  `editor`  y  `storage.admin`  asignados. El prefijo de la cuenta es el número del proyecto, que puedes encontrar en el  **Menú de navegación > Descripción general de Cloud > Panel**.
-
-
+2. Confirma que aparezca la cuenta de servicio predeterminada de Compute  `{project-number}-compute@developer.gserviceaccount.com`  con los roles  `editor`  y  `storage.admin`  asignados. El prefijo de la cuenta es el número del proyecto, que puedes encontrar en el  **Menú de navegación > Descripción general de Cloud > Panel**.
 
 > [!NOTE]
   **Nota:** Si la cuenta no aparece en IAM o no tiene asignado el rol  `storage.admin`, sigue los pasos que se indican a continuación para asignar el rol necesario.
-  
 
 1. En la consola de Google Cloud, en el  **menú de navegación**, haz clic en  **Descripción general de Cloud > Panel**.
 2. Copia el número del proyecto (p. ej.,  `729328892908`).
@@ -45,9 +39,9 @@ Antes de comenzar a trabajar en Google Cloud, asegúrate de que tu proyecto teng
 
 {project-number}-compute@developer.gserviceaccount.com
 
-6.  Reemplaza  `{project-number}`  por el número de tu proyecto.
-7.  En  **Rol**, selecciona  **Administrador de almacenamiento**.
-8.  Haz clic en  **Guardar**.
+6. Reemplaza  `{project-number}`  por el número de tu proyecto.
+7. En  **Rol**, selecciona  **Administrador de almacenamiento**.
+8. Haz clic en  **Guardar**.
 
 ```bash
 export PROJECT_ID=<ingrese el id del projecto>
@@ -96,16 +90,14 @@ Asegúrate de haber hecho lo siguiente:
 |Archivos de entrada de Cloud Storage  | `gs://spls/gsp323/lab.csv` |
 |Ubicación en Cloud Storage del archivo de esquema de BigQuery  | `gs://spls/gsp323/lab.schema` |
 |Tabla de salida de BigQuery  | `Output Table Name` |
-|Directorio temporal para el proceso de carga de BigQuery  | `Temporary BigQuery Directory` | 
+|Directorio temporal para el proceso de carga de BigQuery  | `Temporary BigQuery Directory` |
 |Ubicación temporal  | `Temporary Location` |
 |Parámetros opcionales > Ruta de acceso de UDF de JavaScript en Cloud Storage  | `gs://spls/gsp323/lab.js` |
 |Parámetros opcionales > Nombre de UDF de JavaScript  | `transform` |
 |Parámetros opcionales > Tipo de máquina  | `e2-standard-2` |
 
 **solución** primero tenemos que crear el conjunto de datos y la tabla para eso buscaremos en la [documentación](https://cloud.google.com/bigquery/docs/quickstarts/load-data-bq?hl=es-419)
-y en la de [dataflow](https://cloud.google.com/dataflow/docs/overview?hl=es-419) 
-y [aqui](https://cloud.google.com/sdk/gcloud/reference/dataflow)
-y para ayudarnos con [GCS_Text_to_BigQuery](https://cloud.google.com/dataflow/docs/guides/templates/provided/cloud-storage-to-bigquery?hl=es-419#gcloud)
+y en la de [dataflow](https://cloud.google.com/dataflow/docs/overview?hl=es-419) y [aqui](https://cloud.google.com/sdk/gcloud/reference/dataflow) y para ayudarnos con [GCS_Text_to_BigQuery](https://cloud.google.com/dataflow/docs/guides/templates/provided/cloud-storage-to-bigquery?hl=es-419#gcloud)
 
 ```bash
 export BIGQUERY_DATA_SET_NAME=<ingrese el nombre del dataset>
@@ -132,7 +124,7 @@ gcloud services enable dataflow.googleapis.com --project ${PROJECT_ID}
 #definimos las variables para el dataflow
 #Puedes definir el nombre que quieras
 export NOMBRE_TRABAJO="miDataFlow"
-export UBICACION_GSC=<colocar la Ubicación de Cloud Storage del archivo de esquema de BigQuery>
+export UBICACION_GSC="gs://dataflow-templates-us-central1/latest/GCS_Text_to_BigQuery"
 export ARCHIVOS_ENTRADA=<colocar Archivos de entrada de Cloud Storage>
 export ESQUEMA=<colocar Ubicación en Cloud Storage del archivo de esquema de BigQuery>
 export TABLA_SALIDA_BIGQUERY=<Tabla de salida de BigQuery>
@@ -143,21 +135,15 @@ export TRANSFORM=<Parámetros opcionales  Nombre de UDF de JavaScript> #ejemplo 
 export TIPO_MAQUINA=<colocar Parámetros opcionales Tipo de máquina> #ejemplo "e2-standard-2"
 export NUMERO_TRABAJADORES=3
 
-
-
-
-
-
-
+#Se crea el trabajo para el dataflow
 gcloud dataflow jobs run ${NOMBRE_TRABAJO}\
-  --gcs-location gs://dataflow-templates-us-central1/latest/GCS_Text_to_BigQuery\
-  --region ${REGION}\
-  --num-workers ${NUMERO_TRABAJADORES}\
-  --worker-machine-type ${TIPO_MAQUINA}\
-  --staging-location ${UBICACION_TEMPORAL}\
-  --parameters inputFilePattern=${ARCHIVOS_ENTRADA},JSONPath=${ESQUEMA},outputTable=${PROJECT_ID}:${BIGQUERY_DATA_SET_NAME}.${OUTPUT_TABLE_NAME},bigQueryLoadingTemporaryDirectory=${DIRECTORIO_TEMPORAL},javascriptTextTransformGcsPath=${UDF},javascriptTextTransformFunctionName=${TRANSFORM}
+  --gcs-location ${UBICACION_GSC}$ \
+  --region ${REGION} \
+  --num-workers ${NUMERO_TRABAJADORES} \
+  --worker-machine-type ${TIPO_MAQUINA} \
+  --staging-location ${UBICACION_TEMPORAL} \
+  --parameters inputFilePattern=${ARCHIVOS_ENTRADA},JSONPath=${ESQUEMA},outputTable=outputTable=${TABLA_SALIDA_BIGQUERY},bigQueryLoadingTemporaryDirectory=${DIRECTORIO_TEMPORAL},javascriptTextTransformGcsPath=${UDF},javascriptTextTransformFunctionName=${TRANSFORM}
 ```
-
 
 ## Tarea 2: Ejecuta un trabajo simple de Dataproc
 
@@ -192,7 +178,7 @@ gcloud services disable dataproc.googleapis.com --project ${PROJECT_ID} --force
 gcloud services enable dataproc.googleapis.com --project ${PROJECT_ID}
 
 #definimos las variables que usaremos en el cluster y en el trabajo con spark
-export NOMBRE_CLUSTER=<Ingrese la variable Clúster de Dataproc del lab>
+export NOMBRE_CLUSTER="Mi-Cluster-Dataproc"
 export TAMANO_DISCO_PRINCIPAL=<ingrese el valor de Tamaño del disco principal> #ejemplo 100GB
 export NODO_ADMINISTRADOR_FAMILIA=<ingrese el valor de Nodo administrador>
 export NODO_TRABAJADORES_FAMILIA=<ingrese el valor de Nodo trabajador>
@@ -214,15 +200,18 @@ gcloud dataproc clusters create ${NOMBRE_CLUSTER} \
   --worker-boot-disk-size=${TAMANO_DISCO_PRINCIPAL} \
   --project=${PROJECT_ID}  
 
-#Al finalizar la creacion del cluster copiamos el archivo hdfs al cluster
+# Se extrae la zona del clúster recién creado y se asigna a una variable
+export ZONE=$(gcloud dataproc clusters list \
+  --filter="clusterName=${NOMBRE_CLUSTER}" \
+  --region=${REGION} \
+  --format="value(config.gceClusterConfig.zoneUri)")
 
-gcloud compute ssh ${NOMBRE_CLUSTER}-m
+#Se copia el archivo hdfs al ambiente local de trabajo de la cli
+gsutil cp gs://spls/gsp323/data.txt .
 
-#Se usa el comando dado en el lan
-hdfs dfs -cp gs://spls/gsp323/data.txt /data.txt
-
-#Ahora se vuelve a la terminal
-exit
+#Se copia el archivo al cluster 
+gcloud compute scp data.txt ${NOMBRE_CLUSTER}-m:/data.txt \
+  --zone=${ZONE}
 
 #Se definen las variables para el trabajo
 export TIPO_TRABAJO=<ingrese el Tipo de trabajo del lab>
@@ -257,18 +246,15 @@ gcloud services enable speech.googleapis.com
 export NOMBRE_API="mi-api-key"
 export CLOUD_SPEECH_LOCATION=<ingrese Cloud Speech Location del lab>
 
-# Se crea la API key y se guarda su ID en una variable en un solo paso
-gcloud services api-keys create --display-name=${NOMBRE_API}
-export API_KEY_ID=$(gcloud services api-keys list --format="value(name)")
-
-
-# Se obtiene el valor de la llave API y se guarda en una variable
-export API_KEY=$(gcloud services api-keys list --format="value(keyString)" --filter="displayName=${NOMBRE_API}")
-
-# Se le da los permisos necesarios a la API Key que se creo
-gcloud services api-keys update ${API_KEY_ID} \
+# Se crea la API key y se asignan los permisos en un solo paso
+gcloud services api-keys create --display-name=${NOMBRE_API} \
   --api-target=service=speech.googleapis.com \
-  --api-target=service=language.googleapis.com
+  --api-target=service=language.googleapis.com \
+  --project=${PROJECT_ID} > key_output.json 2>&1
+
+# Se extrae el valor de la key y se elimina el archivo json
+export API_KEY=$(grep -oP '"keyString":"\K[^"]+' key_output.json)
+rm key_output.json
 
 # Se procede a crear el archivo json con los parametros para la peticion a la api
 cat << EOF > request.json
