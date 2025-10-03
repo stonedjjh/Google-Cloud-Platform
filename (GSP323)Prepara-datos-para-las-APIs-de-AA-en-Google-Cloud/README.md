@@ -100,7 +100,7 @@ Asegúrate de haber hecho lo siguiente:
 y en la de [dataflow](https://cloud.google.com/dataflow/docs/overview?hl=es-419) y [aqui](https://cloud.google.com/sdk/gcloud/reference/dataflow) y para ayudarnos con [GCS_Text_to_BigQuery](https://cloud.google.com/dataflow/docs/guides/templates/provided/cloud-storage-to-bigquery?hl=es-419#gcloud)
 
 ```bash
-export BIGQUERY_DATA_SET_NAME=<ingrese el nombre del dataset>
+export BIGQUERY_DATASET_NAME=<ingrese el nombre del dataset>
 export OUTPUT_TABLE_NAME=<ingrese el nombre de la tabla>
 export BUCKET_NAME=<ingrese el nombre del bucket>
 export REGION=<ingrese la region del lab>
@@ -109,22 +109,19 @@ export REGION=<ingrese la region del lab>
 gcloud storage buckets create gs://${BUCKET_NAME} --project=${PROJECT_ID} --location=${REGION} 
 
 # Crea el dataset
-bq mk ${BIGQUERY_DATA_SET_NAME}
+bq mk ${BIGQUERY_DATASET_NAME}
 # Crea la tabla
-bq mk \
-  --table \
-  ${PROJECT_ID}:${BIGQUERY_DATA_SET_NAME}.${OUTPUT_TABLE_NAME}
+bq mk --table \
+  ${PROJECT_ID}:${BIGQUERY_DATASET_NAME}.${OUTPUT_TABLE_NAME}
 
-export REGION=<ingrese la region del lab>
-export ZONE=<ingrese la zona del lab>
 #desactivamos y activamos el servicio de dataflow
 gcloud services disable dataflow.googleapis.com --project ${PROJECT_ID} --force
 gcloud services enable dataflow.googleapis.com --project ${PROJECT_ID}
 
 #definimos las variables para el dataflow
 #Puedes definir el nombre que quieras
-export NOMBRE_TRABAJO="miDataFlow"
-export UBICACION_GSC="gs://dataflow-templates-us-central1/latest/GCS_Text_to_BigQuery"
+export NOMBRE_TRABAJO=mi-data-flow
+export UBICACION_GSC=gs://dataflow-templates-us-central1/latest/GCS_Text_to_BigQuery
 export ARCHIVOS_ENTRADA=<colocar Archivos de entrada de Cloud Storage>
 export ESQUEMA=<colocar Ubicación en Cloud Storage del archivo de esquema de BigQuery>
 export TABLA_SALIDA_BIGQUERY=<Tabla de salida de BigQuery>
@@ -136,13 +133,13 @@ export TIPO_MAQUINA=<colocar Parámetros opcionales Tipo de máquina> #ejemplo "
 export NUMERO_TRABAJADORES=3
 
 #Se crea el trabajo para el dataflow
-gcloud dataflow jobs run ${NOMBRE_TRABAJO}\
-  --gcs-location ${UBICACION_GSC}$ \
-  --region ${REGION} \
-  --num-workers ${NUMERO_TRABAJADORES} \
-  --worker-machine-type ${TIPO_MAQUINA} \
-  --staging-location ${UBICACION_TEMPORAL} \
-  --parameters inputFilePattern=${ARCHIVOS_ENTRADA},JSONPath=${ESQUEMA},outputTable=outputTable=${TABLA_SALIDA_BIGQUERY},bigQueryLoadingTemporaryDirectory=${DIRECTORIO_TEMPORAL},javascriptTextTransformGcsPath=${UDF},javascriptTextTransformFunctionName=${TRANSFORM}
+gcloud dataflow jobs run ${NOMBRE_TRABAJO} \
+  --gcs-location=${UBICACION_GSC} \
+  --region=${REGION} \
+  --num-workers=${NUMERO_TRABAJADORES} \
+  --worker-machine-type=${TIPO_MAQUINA} \
+  --staging-location=${UBICACION_TEMPORAL} \
+  --parameters inputFilePattern=${ARCHIVOS_ENTRADA},JSONPath=${ESQUEMA},outputTable=${TABLA_SALIDA_BIGQUERY},bigQueryLoadingTemporaryDirectory=${DIRECTORIO_TEMPORAL},javascriptTextTransformGcsPath=${UDF},javascriptTextTransformFunctionName=${TRANSFORM}
 ```
 
 ## Tarea 2: Ejecuta un trabajo simple de Dataproc
@@ -178,7 +175,7 @@ gcloud services disable dataproc.googleapis.com --project ${PROJECT_ID} --force
 gcloud services enable dataproc.googleapis.com --project ${PROJECT_ID}
 
 #definimos las variables que usaremos en el cluster y en el trabajo con spark
-export NOMBRE_CLUSTER="Mi-Cluster-Dataproc"
+export NOMBRE_CLUSTER="mi-cluster-dataproc"
 export TAMANO_DISCO_PRINCIPAL=<ingrese el valor de Tamaño del disco principal> #ejemplo 100GB
 export NODO_ADMINISTRADOR_FAMILIA=<ingrese el valor de Nodo administrador>
 export NODO_TRABAJADORES_FAMILIA=<ingrese el valor de Nodo trabajador>
@@ -200,18 +197,22 @@ gcloud dataproc clusters create ${NOMBRE_CLUSTER} \
   --worker-boot-disk-size=${TAMANO_DISCO_PRINCIPAL} \
   --project=${PROJECT_ID}  
 
-# Se extrae la zona del clúster recién creado y se asigna a una variable
+# 1. Genera las claves SSH de forma silenciosa para evitar la interrupción.
+# Esto crea los archivos ~/.ssh/google_compute_engine y ~/.ssh/google_compute_engine.pub
+# con una contraseña vacía ("") de forma no interactiva.
+ssh-keygen -t rsa -N "" -f ~/.ssh/google_compute_engine <<< y > /dev/null 2>&1
+
+# 2. Se extrae la zona del clúster recién creado y se asigna a una variable
 export ZONE=$(gcloud dataproc clusters list \
   --filter="clusterName=${NOMBRE_CLUSTER}" \
   --region=${REGION} \
   --format="value(config.gceClusterConfig.zoneUri)")
 
-#Se copia el archivo hdfs al ambiente local de trabajo de la cli
-gsutil cp gs://spls/gsp323/data.txt .
-
-#Se copia el archivo al cluster 
-gcloud compute scp data.txt ${NOMBRE_CLUSTER}-m:/data.txt \
-  --zone=${ZONE}
+# 3. Comando para copiar el archivo de GCS a HDFS usando la shell del clúster
+# Este comando ahora se ejecutará sin pedir confirmación.
+gcloud compute ssh ${NOMBRE_CLUSTER}-m \
+  --zone=${ZONE} \
+  --command="hdfs dfs -cp gs://spls/gsp323/data.txt /data.txt"
 
 #Se definen las variables para el trabajo
 export TIPO_TRABAJO=<ingrese el Tipo de trabajo del lab>
@@ -243,7 +244,6 @@ gcloud dataproc jobs submit spark \
 # Se deshabilita y habilita la api de speech de gcp
 gcloud services disable speech.googleapis.com
 gcloud services enable speech.googleapis.com
-export NOMBRE_API="mi-api-key"
 export CLOUD_SPEECH_LOCATION=<ingrese Cloud Speech Location del lab>
 
 # Se crea la API key y se asignan los permisos en un solo paso
