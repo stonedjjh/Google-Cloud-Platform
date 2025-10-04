@@ -44,7 +44,6 @@ Antes de comenzar a trabajar en Google Cloud, asegúrate de que tu proyecto teng
 8. Haz clic en  **Guardar**.
 
 ```bash
-export PROJECT_ID=<ingrese el id del projecto>
 # Define las variables de entorno
 export PROJECT_ID=$(gcloud config list --format="value(core.project)")
 export NUMERO_PROJECT=$(gcloud projects describe $PROJECT_ID --format="value(projectNumber)")
@@ -122,14 +121,14 @@ gcloud services enable dataflow.googleapis.com --project ${PROJECT_ID}
 #Puedes definir el nombre que quieras
 export NOMBRE_TRABAJO=mi-data-flow
 export UBICACION_GSC=gs://dataflow-templates-us-central1/latest/GCS_Text_to_BigQuery
-export ARCHIVOS_ENTRADA=<colocar Archivos de entrada de Cloud Storage>
-export ESQUEMA=<colocar Ubicación en Cloud Storage del archivo de esquema de BigQuery>
+export ARCHIVOS_ENTRADA=gs://spls/gsp323/lab.csv
+export ESQUEMA=gs://spls/gsp323/lab.schema
 export TABLA_SALIDA_BIGQUERY=<Tabla de salida de BigQuery>
 export DIRECTORIO_TEMPORAL=<colocar el Directorio temporal para el proceso de carga de BigQuery>
 export UBICACION_TEMPORAL=<colocar la Ubicación temporal del lab>
-export UDF=<Parámetros opcionales  Ruta de acceso de UDF de JavaScript en Cloud Storage>
-export TRANSFORM=<Parámetros opcionales  Nombre de UDF de JavaScript> #ejemplo transform
-export TIPO_MAQUINA=<colocar Parámetros opcionales Tipo de máquina> #ejemplo "e2-standard-2"
+export UDF=gs://spls/gsp323/lab.js
+export TRANSFORM=transform
+export TIPO_MAQUINA=e2-standard-2
 export NUMERO_TRABAJADORES=3
 
 #Se crea el trabajo para el dataflow
@@ -176,10 +175,10 @@ gcloud services enable dataproc.googleapis.com --project ${PROJECT_ID}
 
 #definimos las variables que usaremos en el cluster y en el trabajo con spark
 export NOMBRE_CLUSTER="mi-cluster-dataproc"
-export TAMANO_DISCO_PRINCIPAL=<ingrese el valor de Tamaño del disco principal> #ejemplo 100GB
-export NODO_ADMINISTRADOR_FAMILIA=<ingrese el valor de Nodo administrador>
-export NODO_TRABAJADORES_FAMILIA=<ingrese el valor de Nodo trabajador>
-export MAXIMO_NODOS_TRABAJO=<ingrese el valor de Máx. de nodos trabajadores>
+export TAMANO_DISCO_PRINCIPAL=100GB
+export NODO_ADMINISTRADOR_FAMILIA=e2-standard-2
+export NODO_TRABAJADORES_FAMILIA=e2-standard-2
+export MAXIMO_NODOS_TRABAJO=2
 #La familia de maquinas e2-standard-2 no soporta el disco pd-standard por lo cual se debe
 #cambiar a pd-ssd
 export TIPO_DISCO="pd-ssd"
@@ -215,11 +214,11 @@ gcloud compute ssh ${NOMBRE_CLUSTER}-m \
   --command="hdfs dfs -cp gs://spls/gsp323/data.txt /data.txt"
 
 #Se definen las variables para el trabajo
-export TIPO_TRABAJO=<ingrese el Tipo de trabajo del lab>
-export CLASE_PRINCIPAL=<ingrese el Clase principal o jar del lab>
-export ARCHIVO=<ingrese el valor de Archivos jar del lab>
-export ARGUMENTO=<ingrese el valor de Argumentos> #ejemplo /data.txt
-export MAXIMO_REINTENTO_HORA=<Cantidad máxima de reinicios por hora> #ejemplo 1
+export TIPO_TRABAJO=spark
+export CLASE_PRINCIPAL=org.apache.spark.examples.SparkPageRank
+export ARCHIVO=file:///usr/lib/spark/examples/jars/spark-examples.jar
+export ARGUMENTO=/data.txt
+export MAXIMO_REINTENTO_HORA=1
 
 # Se procede a enviar el trabajo
 gcloud dataproc jobs submit spark \
@@ -289,3 +288,50 @@ export CLOUD_NATURAL_LANGUAGE_LOCATION=<ingrese Cloud Natural Language Location 
 gcloud ml language analyze-entities --content="Old Norse texts portray Odin as one-eyed and long-bearded, frequently wielding a spear named Gungnir and wearing a cloak and a broad hat" > result.json
 gsutil cp result.json ${CLOUD_NATURAL_LANGUAGE_LOCATION}
 ```
+---
+## Solución automatizada
+También puedes resolver este laboratorio ejecutando un script de automatización en tu entorno de Cloud Shell. Este archivo contiene todos los comandos de gcloud en orden para crear la infraestructura.
+
+Pasos para ejecutar el script
+Crear el archivo del script:
+En Cloud Shell, ejecuta el siguiente comando para crear un archivo vacío llamado solucion.sh:
+
+```Bash
+touch solucion.sh
+```
+
+Abrir el Editor de Código:
+Haz clic en Open Editor en la parte superior derecha de tu terminal de Cloud Shell. En el menú de la izquierda, selecciona el archivo solucion.sh que acabas de crear.
+
+Pegar el contenido:
+Copia el código completo del script solucion.sh y pégalo en el editor. Luego, guarda el archivo.
+
+⚠️ NOTA CRÍTICA DE PREPARACIÓN ⚠️
+
+Antes de guardar el archivo, debes actualizar las siguientes variables dentro del script con los valores únicos que te proporciona el laboratorio de desafío (GSP323):
+
+REGION
+BUCKET_NAME
+BIGQUERY_DATASET_NAME
+OUTPUT_TABLE_NAME
+CLOUD_SPEECH_LOCATION
+CLOUD_NATURAL_LANGUAGE_LOCATION
+
+Una vez que las variables específicas del laboratorio sean correctas, guarda el archivo 
+
+Hacer el archivo ejecutable:
+Regresa a la terminal y otorga permisos de ejecución al script con el siguiente comando:
+
+```Bash
+chmod +x solucion.sh
+```
+
+Ejecutar el script:
+Para ejecutar el script y asegurarte de que las variables de entorno se mantengan en tu sesión de Cloud Shell, usa el comando source o el punto (.).
+
+```Bash
+source ./solucion.sh
+# O
+. ./solucion.sh
+```
+El script ahora se ejecutará, y la infraestructura del laboratorio será creada automáticamente.
