@@ -1,5 +1,43 @@
 # Comandos de red (Network)
 
+## Networks
+
+Para operaciones con una `VPC` usaremos el comando `gcloud compute networks`
+
+Para [referencias](https://docs.cloud.google.com/sdk/gcloud/reference/compute/networks)
+
+### Crear una red
+
+Para crear una red usaremos el comando `gcloud compute networks create`
+
+**Ejemplo:**
+
+```bash
+gcloud compute networks create network-name --subnet-mode=custom
+```
+
+En este ejemplo:
+
+- `network-name` es el nombre de la red
+
+- `--subnet-mode` es el modo de la subred
+
+## SUBNETS
+
+Para operaciones con una subred usaremos el comando `gcloud compute networks subnets`
+
+Para [referencias](https://docs.cloud.google.com/sdk/gcloud/reference/compute/networks/subnets) y [Subredes](https://docs.cloud.google.com/vpc/docs/subnets?hl=es-419)
+
+## Crear Subnet
+
+Para crear una red usaremos el comando `gcloud compute networks subnets create`
+
+**Ejemplo:**
+
+```bash
+gcloud compute networks subnets create subnet-1 --network=network-0 --range=10.10.0.0/24 --region=us-central1
+```
+
 ## IP
 
 ### Crear una dirección
