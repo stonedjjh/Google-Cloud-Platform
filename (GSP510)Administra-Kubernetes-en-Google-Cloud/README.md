@@ -1,6 +1,6 @@
 # Administra Kubernetes en Google Cloud
 
-## GSP510
+## [GSP510](https://www.skills.google/focuses/58179?parent=catalog)
 
 ![Logotipo de los labs de autoaprendizaje de Google Cloud](https://cdn.qwiklabs.com/GMOHykaqmlTHiqEeQXTySaMXYPHeIvaqa2qHEzw6Occ%3D)
 
@@ -62,32 +62,35 @@ El nuevo sitio web de comercio electrónico de Cymbal Shops se ejecutará de for
 
     1. Crea un clúster de GKE llamado ==cluster name== con la siguiente configuración:
 
-   |Parámetro de configuración|Valor|
-   |:-------------------------|:----|
-   |Zona|==ZONE==|
-   |Canal de versiones|Regular|
-   |Versión de destino del clúster|default|
-   |Escalador automático de clúster|Habilitado|
-   |Cantidad de nodos|3|
-   |Cantidad mínima de nodos|2|
-   |Cantidad máxima de nodos|6|
+| Parámetro de configuración      | Valor      |
+| :------------------------------ | :--------- |
+| Zona                            | ==ZONE==   |
+| Canal de versiones              | Regular    |
+| Versión de destino del clúster  | default    |
+| Escalador automático de clúster | Habilitado |
+| Cantidad de nodos               | 3          |
+| Cantidad mínima de nodos        | 2          |
+| Cantidad máxima de nodos        | 6          |
 
-   ```bash
-   ZONE=<Ingrese zona del lab>
-   CLUSTER_NAME=<Ingrese nombre del cluster>
-   
-   echo -e "\e[1mTarea 1: Crear cluster de GKE $CLUSTER_NAME\e[0m\n"
-   
-   gcloud container clusters create $CLUSTER_NAME \
-     --zone=$ZONE \     
-     --num-nodes=3 \
-     --min-nodes=2 \
-     --max-nodes=6 \
-     --enable-autoscaling
-   
-   echo -e "\n\e[32mCruster Creado\e[0m\n"  
-   gcloud container clusters get-credentials $CLUSTER_NAME --zone=$ZONE
-   ```
+**Solucion Tarea 1:**
+
+```bash
+ZONE=<Ingrese zona del lab>
+CLUSTER_NAME=<Ingrese nombre del cluster>
+PROJECT_ID=$(gcloud config list --format="value(core.project)")
+
+echo -e "\e[1mTarea 1: Crear cluster de GKE $CLUSTER_NAME\e[0m\n"
+
+gcloud container clusters create $CLUSTER_NAME \
+  --zone=$ZONE \
+  --num-nodes=3 \
+  --min-nodes=2 \
+  --max-nodes=6 \
+  --enable-autoscaling
+
+echo -e "\n\e[32mCruster Creado\e[0m\n"
+gcloud container clusters get-credentials $CLUSTER_NAME --zone=$ZONE
+```
 
 ---
 
@@ -95,36 +98,42 @@ El nuevo sitio web de comercio electrónico de Cymbal Shops se ejecutará de for
 
 Como parte de la estrategia del sitio web de comercio electrónico, Cymbal Shops quiere comenzar a usar Prometheus administrado para las métricas y la supervisión en el clúster y, así, brindarles una buena experiencia a sus clientes. En esta sección, habilitarás Prometheus administrado en el clúster para supervisar métricas y crearás un espacio de nombres para implementar una aplicación de Prometheus de muestra y la supervisión de Pods.
 
-   1. Habilita la recopilación de Prometheus administrado en el clúster de GKE.
-   2. Crea un espacio de nombres en el clúster llamado ==namespace name==.
-   3. Descarga una app de Prometheus de ejemplo:
+1. Habilita la recopilación de Prometheus administrado en el clúster de GKE.
+2. Crea un espacio de nombres en el clúster llamado ==namespace name==.
+3. Descarga una app de Prometheus de ejemplo:
 
-      `gcloud storage cp gs://spls/gsp510/prometheus-app.yaml .`
+   `gcloud storage cp gs://spls/gsp510/prometheus-app.yaml .`
 
-   4. Actualiza las secciones `<todo>` (líneas 35 a 38) con la siguiente configuración:
+4. Actualiza las secciones `<todo>` (líneas 35 a 38) con la siguiente configuración:
+   - **containers.image:** nilebox/prometheus-example-app:latest
+   - **containers.name:** prometheus-test
+   - **ports.name:** metrics
 
-      - **containers.image:** nilebox/prometheus-example-app:latest
-      - **containers.name:** prometheus-test
-      - **ports.name:** metrics
+5. Implementa la aplicación en el espacio de nombres ==namespace name== de tu clúster de GKE.
 
-   5. Implementa la aplicación en el espacio de nombres ==namespace name== de tu clúster de GKE.
+6. Descarga el archivo pod-monitoring.yaml:
 
-   6. Descarga el archivo pod-monitoring.yaml:
+   `gcloud storage cp gs://spls/gsp510/pod-monitoring.yaml .`
 
-      `gcloud storage cp gs://spls/gsp510/pod-monitoring.yaml .`
+7. Actualiza las secciones `<todo>` (líneas 18 a 24) con la siguiente configuración:
+   - **metadata.name:** prometheus-test
+   - **labels.app.kubernetes.io/name:** prometheus-test
+   - **matchLabels.app:** prometheus-test
+   - **endpoints.interval:** interval period
 
-   7. Actualiza las secciones `<todo>` (líneas 18 a 24) con la siguiente configuración:
-
-      - **metadata.name:** prometheus-test
-      - **labels.app.kubernetes.io/name:** prometheus-test
-      - **matchLabels.app:** prometheus-test
-      - **endpoints.interval:** interval period
-
-   8. Aplica el recurso de supervisión de Pod en el espacio de nombres ==namespace name== en tu clúster de GKE.
+8. Aplica el recurso de supervisión de Pod en el espacio de nombres ==namespace name== en tu clúster de GKE.
 
 ```bash
 NAMESPACE_NAME=<Ingrese nombre del espacio de nombres>
 INTERVAL_PERIOD=<Ingrese intervalo de tiempo>
+CONTAINER_IMAGE=nilebox/prometheus-example-app:latest
+CONTAINER_NAME=prometheus-test
+PORT_NAME=metrics
+METADATA_NAME=prometheus-test
+IO_NAME=$METADATA_NAME
+MATCH_LABELS_APP=$METADATA_NAME
+ENDPOINTS_INTERVAL=<ingrese intervalo de tiempo>
+
 
 echo -e "\e[1mTarea 2: Habilitar Prometheus administrado en el clúster\e[0m\n"
 
@@ -149,6 +158,14 @@ echo -e "\n\e[32mApp de Prometheus descargada\e[0m\n"
 
 echo -e "Paso 4 Actualiza las secciones <todo> (líneas 35 a 38)\n"
 
+sed -i "s#image: <todo>#image: $CONTAINER_IMAGE#g" prometheus-app.yaml
+
+sed -i "s#- name: <todo>#- name: $PORT_NAME#g" prometheus-app.yaml
+
+sed -i "s#name: <todo>#name: $CONTAINER_NAME#g" prometheus-app.yaml
+
+echo -e "\n\e[32mApp de Prometheus actualizada\e[0m\n"
+
 echo -e "Paso 5 Implementa la aplicación en el espacio de nombres $NAMESPACE_NAME de tu clúster de GKE\n"
 
 kubectl -n $NAMESPACE_NAME apply -f prometheus-app.yaml
@@ -162,6 +179,19 @@ gcloud storage cp gs://spls/gsp510/pod-monitoring.yaml .
 echo -e "\n\e[32mArchivo pod-monitoring.yaml descargado\e[0m\n"
 
 echo -e "Paso 7 Actualiza las secciones <todo> (líneas 18 a 24)\n"
+
+# 1. Primero el más específico (la etiqueta con barra diagonal)
+sed -i "s#app.kubernetes.io/name: <todo>#app.kubernetes.io/name: $METADATA_NAME#g" pod-monitoring.yaml
+
+# 2. El intervalo (suele ser único, se puede hacer directo)
+sed -i "s#interval: <todo>#interval: $INTERVAL_PERIOD#g" pod-monitoring.yaml
+
+# 3. La etiqueta de la app simple
+sed -i "s#app: <todo>#app: $METADATA_NAME#g" pod-monitoring.yaml
+
+# 4. Al final, el name genérico (cuando ya limpiamos los anteriores para evitar sobreescritura)
+sed -i "s#name: <todo>#name: $METADATA_NAME#g" pod-monitoring.yaml
+
 
 echo -e "Paso 8 Aplica el recurso de supervisión de Pod en el espacio de nombres $NAMESPACE_NAME en tu clúster de GKE\n"
 
@@ -179,15 +209,15 @@ kubectl get pods -n $NAMESPACE_NAME
 
 El equipo de desarrollo de Cymbal Shops lanzará constantemente código de aplicación nuevo en el clúster que tendrás que implementar de manera correcta en producción. En esta sección, implementarás un manifiesto de Kubernetes en el clúster y, luego, inspeccionarás el problema.
 
-   1. Descarga los archivos de manifiesto para la implementación de la demostración:
+1. Descarga los archivos de manifiesto para la implementación de la demostración:
 
-      `gcloud storage cp -r gs://spls/gsp510/hello-app/ .`
+   `gcloud storage cp -r gs://spls/gsp510/hello-app/ .`
 
-   2. Crea una implementación en el espacio de nombres ==namespace name== en tu clúster de GKE desde el archivo de manifiesto `helloweb-deployment.yaml`. Se encuentra en la carpeta `hello-app/manifests`.
+2. Crea una implementación en el espacio de nombres ==namespace name== en tu clúster de GKE desde el archivo de manifiesto `helloweb-deployment.yaml`. Se encuentra en la carpeta `hello-app/manifests`.
 
-   3. Verifica que hayas creado la implementación y navega a la página de detalles de la implementación de **helloweb**. Deberías ver el siguiente error:
+3. Verifica que hayas creado la implementación y navega a la página de detalles de la implementación de **helloweb**. Deberías ver el siguiente error:
 
-   ![error de nombre de imagen no válido](https://cdn.qwiklabs.com/OONay%2Feg%2FuH6FbRql2BVYFxbv%2FrWV1ER97BP1RRyjbY%3D)
+![error de nombre de imagen no válido](https://cdn.qwiklabs.com/OONay%2Feg%2FuH6FbRql2BVYFxbv%2FrWV1ER97BP1RRyjbY%3D)
 
 Este error parece provenir de un nombre de imagen no válido en el manifiesto que acabas de implementar. Antes de corregir el nombre de la imagen, crearás una métrica basada en registros y una política de alertas para que tu equipo reciba una notificación si esto vuelve a ocurrir en el futuro.
 
@@ -195,13 +225,13 @@ Este error parece provenir de un nombre de imagen no válido en el manifiesto qu
 
 echo -e "\e[1mTarea 3: Implementa una aplicación en el clúster de GKE\e[0m\n"
 
-echo -e "\e[1m\ePaso1 Descarga los archivos de manifiesto para la implementación de la demostración[0m\n"
+echo -e "\e[1mPaso1 Descarga los archivos de manifiesto para la implementación de la demostración[0m\n"
 
 gcloud storage cp -r gs://spls/gsp510/hello-app/ .
 
 echo -e "\n\e[32mArchivos de manifiesto descargados\e[0m\n"
 
-echo -e "\e[1m\ePaso2 Crea una implementación en el espacio de nombres $NAMESPACE_NAME en tu clúster de GKE[0m\n"
+echo -e "\e[1mPaso2 Crea una implementación en el espacio de nombres $NAMESPACE_NAME en tu clúster de GKE[0m\n"
 
 kubectl -n $NAMESPACE_NAME apply -f hello-app/manifests/helloweb-deployment.yaml
 
@@ -216,40 +246,39 @@ A Cymbal Shops le gustaría configurar algunas métricas basadas en registros y 
 
 #### Crea una métrica basada en registros
 
-   1. En el Explorador de registros, crea una consulta que devuelva las advertencias o los errores que viste en la sección anterior sobre el clúster.
+1. En el Explorador de registros, crea una consulta que devuelva las advertencias o los errores que viste en la sección anterior sobre el clúster.
 
-      > [!NOTE]
-      > **nota:** Tu consulta debe tener seleccionados solo un tipo de recurso y una gravedad.
-      Si la consulta es correcta, cuando se ejecute, deberías ver los siguientes errores en los registros:
+   > [!NOTE]
+   > **nota:** Tu consulta debe tener seleccionados solo un tipo de recurso y una gravedad.
+   > Si la consulta es correcta, cuando se ejecute, deberías ver los siguientes errores en los registros:
 
-      **Resultado:**
+   **Resultado:**
 
-      ```bash
-      Error: InvalidImageName
-      Failed to apply default image tag "`<todo>`": couldn't parse image
-      reference "`<todo>`": invalid reference format
-      ```
+   ```bash
+   Error: InvalidImageName
+   Failed to apply default image tag "`<todo>`": couldn't parse image
+   reference "`<todo>`": invalid reference format
+   ```
 
-   2. Crea una métrica basada en registros a partir de esta consulta. En **Tipo de métrica**, usa **Contador** y, en **Nombre de la métrica de registro**, usa pod-image-errors.
+2. Crea una métrica basada en registros a partir de esta consulta. En **Tipo de métrica**, usa **Contador** y, en **Nombre de la métrica de registro**, usa pod-image-errors.
 
 #### Crea una política de alertas
 
-   1. Crea una política de alertas en función de la métrica basada en registros que acabas de crear. Usa los siguientes detalles para configurar tu política:
-
-      - **Ventana progresiva:** 10 min
-      - **Función de ventana progresiva:** Count
-      - **Agregación de series temporales:** Sum
-      - **Tipo de condición:** Umbral
-      - **Activador de alertas:** Cualquier serie temporal tiene incumplimientos
-      - **Posición del umbral:** Por encima del umbral
-      - **Valor del umbral:** 0
-      - **Usar el canal de notificaciones:** Inhabilitar
-      - **Nombre de la política de alertas:** Pod Error Alert
+1. Crea una política de alertas en función de la métrica basada en registros que acabas de crear. Usa los siguientes detalles para configurar tu política:
+   - **Ventana progresiva:** 10 min
+   - **Función de ventana progresiva:** Count
+   - **Agregación de series temporales:** Sum
+   - **Tipo de condición:** Umbral
+   - **Activador de alertas:** Cualquier serie temporal tiene incumplimientos
+   - **Posición del umbral:** Por encima del umbral
+   - **Valor del umbral:** 0
+   - **Usar el canal de notificaciones:** Inhabilitar
+   - **Nombre de la política de alertas:** Pod Error Alert
 
 ```bash
 echo -e "\e[1mTarea 4: Crea una métrica basada en registros y una política de alertas\e[0m\n"
 
-echo -e "\e[1m\ePaso1 crea una consulta que devuelva las advertencias o los errores[0m\n"
+echo -e "\e[1mPaso1 crea una consulta que devuelva las advertencias o los errores[0m\n"
 
 gcloud logging read "resource.type=\"k8s_container\" AND resource.labels.cluster_name=\"$CLUSTER_NAME\" AND (severity=ERROR OR severity=WARNING)" \
     --limit=10 \
@@ -257,7 +286,7 @@ gcloud logging read "resource.type=\"k8s_container\" AND resource.labels.cluster
 
 echo -e "\n\e[32mConsulta creada\e[0m\n"
 
-echo -e "\e[1m\ePaso2 crea una métrica basada en registros[0m\n"   
+echo -e "\e[1mPaso2 crea una métrica basada en registros[0m\n"
 
 gcloud logging metrics create pod-image-errors \
     --description="Métrica para capturar errores de imagen en los Pods" \
@@ -266,7 +295,7 @@ severity=WARNING"
 
 echo -e "\n\e[32mMétrica basada en registros creada\e[0m\n"
 
-echo -e "\e[1m\ePaso3 crea una política de alertas[0m\n"
+echo -e "\e[1mPaso3 crea una política de alertas[0m\n"
 
 cat << 'EOF' > alerta.json
 {
@@ -313,13 +342,12 @@ echo -e "\n\e[32mPolítica de alertas creada\e[0m\n"
 
 El equipo de desarrollo quiere que demuestres tus conocimientos para borrar y actualizar implementaciones en el clúster en caso de error. En esta sección, actualizarás un manifiesto de Kubernetes con una referencia de imagen correcta, borrarás una implementación y, luego, implementarás la aplicación actualizada en el clúster.
 
-   1. Reemplaza `<todo>` en la sección de imagen del manifiesto de implementación helloweb-deployment.yaml por la siguiente imagen:
+1. Reemplaza `<todo>` en la sección de imagen del manifiesto de implementación helloweb-deployment.yaml por la siguiente imagen:
+   - us-docker.pkg.dev/google-samples/containers/gke/hello-app:1.0
 
-      - us-docker.pkg.dev/google-samples/containers/gke/hello-app:1.0
+2. **Borra** la implementación **helloweb** de tu clúster.
 
-   2. **Borra** la implementación **helloweb** de tu clúster.
-
-   3. Implementa el manifiesto `helloweb-deployment.yaml` actualizado en el espacio de nombres ==namespace name== de tu clúster.
+3. Implementa el manifiesto `helloweb-deployment.yaml` actualizado en el espacio de nombres ==namespace name== de tu clúster.
 
 Debes verificar que se haya implementado correctamente y sin errores. La página Cargas de trabajo de Kubernetes se debería ver de la siguiente manera:
 
@@ -329,7 +357,9 @@ Debes verificar que se haya implementado correctamente y sin errores. La página
 
 echo -e "\e[1mTarea 5: Actualiza y vuelve a implementar tu app\e[0m\n"
 
-echo -e "\e[1m\ePaso1 Reemplaza <todo>\e[0m\n"
+echo -e "\e[1mPaso1 Reemplaza <todo>\e[0m\n"
+
+sed -i "s#image: <todo>#image: us-docker.pkg.dev/google-samples/containers/gke/hello-app:1.0#g" hello-app/manifests/helloweb-deployment.yaml
 
 echo -e "\n\e[32mBorra la implementación helloweb de tu clúster\e[0m\n"
 
@@ -353,31 +383,75 @@ Por último, como parte de la estrategia de comercio electrónico de Cymbal Shop
 
 En esta sección, alojarás en contenedores el código de la aplicación, actualizarás una imagen en Artifact Registry y la configurarás en la imagen de tu clúster. Tu equipo tiene un repositorio en Artifact Registry llamado repo name que contiene una versión alojada en contenedores de la app de ejemplo hello-app en Docker. Actualizarás el código de la compilación de forma local y, luego, enviarás una nueva versión al repositorio.
 
-   1. En el directorio hello-app, actualiza el archivo **main.go** para usar Version: 2.0.0 en la línea 49.
+1. En el directorio hello-app, actualiza el archivo **main.go** para usar Version: 2.0.0 en la línea 49.
 
-   2. Usa hello-app/Dockerfile para crear una imagen de Docker con la etiqueta v2.
+2. Usa hello-app/Dockerfile para crear una imagen de Docker con la etiqueta v2.
 
-      > [!NOTE]
-      > **Nota:** Debes seguir las convenciones de nomenclatura de Artifact Registry que se detallan aquí.
+   > [!NOTE]
+   > **Nota:** Debes seguir las convenciones de nomenclatura de Artifact Registry que se detallan aquí.
 
-    3. Envía la imagen de Docker recién compilada a tu repositorio en Artifact Registry con la etiqueta v2.
+3. Envía la imagen de Docker recién compilada a tu repositorio en Artifact Registry con la etiqueta v2.
 
-    4. Configura la imagen en tu implementación de **helloweb** para reflejar la imagen v2 que enviaste a Artifact Registry.
-    
-    5. Expón la implementación **helloweb** a un servicio de LoadBalancer llamado ==service name== en el puerto 8080 y establece el puerto de destino del contenedor en el que está especificado en el Dockerfile.
-    
-    Navega a la dirección IP del balanceador de cargas externo del servicio ==service name==. Deberías ver el siguiente texto que devuelve el servicio:
-    
+4. Configura la imagen en tu implementación de **helloweb** para reflejar la imagen v2 que enviaste a Artifact Registry.
+
+5. Expón la implementación **helloweb** a un servicio de LoadBalancer llamado ==service name== en el puerto 8080 y establece el puerto de destino del contenedor en el que está especificado en el Dockerfile.
+
+   Navega a la dirección IP del balanceador de cargas externo del servicio ==service name==. Deberías ver el siguiente texto que devuelve el servicio:
+
 Resultado:
 
-´´´bash
+```bash
 Hello, world!
 Version: 2.0.0
 Hostname: helloweb-6fc7476576-cvv5f
-´´´
+```
+
+```bash
+REPO_NAME=<Ingrese nombre del repositorio>
+SERVICE_NAME=<Ingrese nombre del servicio>
+
+echo -e "\e[1mTarea 6: Aloja tu código en contenedores e impleméntalo en el clúster\e[0m\n"
+
+echo -e "\e[1mPaso1 Actualiza el archivo main.go\e[0m\n"
+
+sed -i '49s/Version: .*/Version: 2.0.0/' hello-app/main.go
+
+echo -e "\n\e[32mArchivo main.go actualizado\e[0m\n"
+
+echo -e "\e[1mPaso2 Usa hello-app/Dockerfile para crear una imagen de Docker con la etiqueta v2\e[0m\n"
+
+cd hello-app
+docker build -t $ZONE-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/hello-app:v2 .
+
+echo -e "\n\e[32mImagen de Docker creada\e[0m\n"
+
+echo -e "\e[1mPaso3 Envía la imagen de Docker recién compilada a tu repositorio en Artifact Registry con la etiqueta v2\e[0m\n"
+
+docker push $ZONE-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/hello-app:v2
+
+echo -e "\n\e[32mImagen de Docker enviada a Artifact Registry\e[0m\n"
+
+echo -e "\e[1mPaso4 Configura la imagen en tu implementación de helloweb\e[0m\n"
+
+kubectl set image deployment/helloweb helloweb=$ZONE-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/hello-app:v2 -n $NAMESPACE_NAME
+
+echo -e "\n\e[32mImagen de Docker configurada en la implementación de helloweb\e[0m\n"
+
+echo -e "\e[1mPaso5 Expón la implementación helloweb a un servicio de LoadBalancer llamado $SERVICE_NAME\e[0m\n"
+
+kubectl expose deployment helloweb --type=LoadBalancer --name=$SERVICE_NAME --port=8080 --target-port=8080 -n $NAMESPACE_NAME
+
+kubectl get service
+
+
+
+
+```
 
 > [!NOTE]
 > **Nota:** La página web puede tardar unos minutos en cargarse.
+
+Como no sabia el contenido de los archivos para poder automatizarlos hice el ejercicio desde la consola para hacer un cat para tener la estructura de los mismos para podre actualizarlos
 
 ```YAML
 # prometheus-app.yml
@@ -455,4 +529,52 @@ spec:
   endpoints:
   - port: metrics
     interval: <todo>
+```
+
+```bash
+#helloweb-deployment.yaml
+
+# Copyright 2021 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# [START gke_manifests_helloweb_deployment_deployment_helloweb]
+# [START container_helloapp_deployment]
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: helloweb
+  labels:
+    app: hello
+spec:
+  selector:
+    matchLabels:
+      app: hello
+      tier: web
+  template:
+    metadata:
+      labels:
+        app: hello
+        tier: web
+    spec:
+      containers:
+      - name: hello-app
+        image: <todo>
+        ports:
+        - containerPort: 8080
+        resources:
+          requests:
+            cpu: 200m
+# [END container_helloapp_deployment]
+# [END gke_manifests_helloweb_deployment_deployment_helloweb]
 ```
