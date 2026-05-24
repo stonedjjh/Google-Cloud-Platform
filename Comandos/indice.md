@@ -2,8 +2,13 @@
 
 A continuación se categorizan los comandos de GCP para una consulta más ágil:
 
-- [Comandos generales](./generales.md)
+- [Artifact Registry](./artifact-registry.md)
+- [Cloud SQL](./sql-instances.md)
 - [Comandos de instancias (VM)](./instancias.md)
 - [Comandos de red (Network)](./red.md)
-- [Storage](./storage.md)
+- [Comandos generales](./generales.md)
+- [GKE](./gke.md)
 - [IAM](./iam.md)
+- [Storage](./storage.md)
+
+---
