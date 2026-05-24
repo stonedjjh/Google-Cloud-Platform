@@ -1,4 +1,4 @@
-# Administra Kubernetes en Google Cloud
+# Crea e implementa una imagen de Docker para un clúster de Kubernetes
 
 ## [GSP304](https://www.skills.google/paths/125/course_templates/640/labs/613293)
 
@@ -32,7 +32,7 @@ Tu entorno de pruebas tiene una capacidad limitada, por lo que debes restringir 
 
 **Solución Tarea 1:**
 
-Ok este paso es sencillo es crear un cluster llamado echo-cluster y solo nos piden que la familia de instancia sea `e2-standard-2` y 2 nodos, por defecto son 3.  Se njecesita la Zona pero esa la obtendremos de lab.
+Ok este paso es sencillo es crear un cluster llamado echo-cluster y solo nos piden que la familia de instancia sea `e2-standard-2` y 2 nodos, por defecto son 3. Se njecesita la Zona pero esa la obtendremos de lab.
 
 ```bash
 ZONE=<Ingrese zona del lab>
@@ -176,7 +176,7 @@ echo -e "Paso 2 Ejecutar el deployment\n"
 kubectl apply -f echo-web.yaml
 
 echo -e "\n\e[32mDeployment creado\e[0m\n"
-      
+
 ```
 
 > [!TIP]
