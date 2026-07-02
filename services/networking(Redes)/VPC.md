@@ -40,3 +40,15 @@ graph TD
 > [!TIP]
 > **Tip de Arquitectura para el Examen:**
 > ¡Recuerda siempre esta regla de oro: **VPC = Global, Subred = Regional**! Múltiples VMs pueden compartir exactamente la misma subred aunque se encuentren en diferentes zonas (ej. zona `A` y zona `B`), lo que facilita enormemente el diseño de arquitecturas de Alta Disponibilidad (HA) sin complicar el diseño de red.
+
+---
+
+## Datos Clave y Límites (Quotas)
+
+- **Límite de Redes VPC:** Por defecto, Google Cloud permite un máximo de **15 redes VPC por proyecto**. Si tu diseño requiere más, debes solicitar un incremento de cuota.
+- **Subred requerida:** Una red VPC debe tener al menos una subred creada para poder asociarle recursos (como instancias de VM) y utilizarla.
+- **Modos de creación (Auto vs Custom):** Las redes de modo automático crean una subred por región por defecto, mientras que las redes de **modo personalizado (Custom Mode) comienzan sin ninguna subred**, requiriendo que las crees manualmente antes de poder desplegar recursos.
+- **Sin Broadcast ni Multicast nativo:** La red de Google Cloud solo soporta tráfico **Unicast**. No es posible enviar tráfico de tipo broadcast o multicast tradicional directamente.
+- **La red por defecto ("default"):** Cada nuevo proyecto se crea con una red VPC predeterminada con subredes automáticas en cada región y reglas de firewall que permiten el tráfico de entrada SSH y RDP. Por seguridad, la mejor práctica en entornos de producción es **eliminar la red default** y configurar redes personalizadas (Custom Mode).
+
+

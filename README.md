@@ -73,20 +73,19 @@ _(La lista se irá ampliando conforme agregue más soluciones.)_
 
 ---
 
-## � Guías y Referencias Generales
+## 📚 Guías y Referencias Generales
 
-- [`Conceptos de Google Cloud Platform`](./GCP.md)  
-  Apuntes sobre la infraestructura global, seguridad, facturación, jerarquía de recursos e IAM.
-- [`Redes en Google Cloud (VPC)`](./VPC.MD)
-  Explicación sobre la Nube Privada Virtual (VPC), subredes y la diferencia fundamental entre alcance regional y global.
-- [`Verificaciones de estado (Health Checks)`](./Health-Checks-Legacy-vs-Global.md)
-  Diferencias clave entre las verificaciones de estado heredadas (legacy) y las globales/modernas.
-- [`Comandos de GCP`](./Comandos/indice.md)
-  Hoja de referencia con los comandos de `gcloud.
+La documentación teórica y guías sobre los diferentes servicios de GCP se encuentran organizadas por categorías en la carpeta de servicios:
+
+👉 **[Ver el Índice de Servicios de GCP (GCP Services Index)](./services/README.md)**
+
+También puedes consultar otras referencias rápidas:
+- [`Comandos de GCP`](./Comandos/indice.md)  
+  Hoja de referencia con los comandos de `gcloud`.
 
 ---
 
-## �🛠️ Tecnologías y servicios de GCP usados
+## 🛠️ Tecnologías y servicios de GCP usados
 
 - Compute Engine
 - Cloud Load Balancing
