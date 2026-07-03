@@ -32,6 +32,8 @@ Este directorio contiene apuntes, guías conceptuales y documentación técnica 
   Almacenamiento en caché en puntos perimetrales, integración con balanceadores de carga, URLs firmadas e invalidación.
 * [Cloud VPN (Virtual Private Network)](./networking(Redes)/cloud-vpn.md)  
   Conectividad híbrida cifrada sobre internet, diferencias entre HA VPN (99.99%) y Classic VPN (99.9%).
+* [Cloud Router (Enrutador de Nube)](./networking(Redes)/cloud-router.md)  
+  Enrutamiento dinámico mediante intercambio de rutas con BGP para VPN, Interconnect y Cloud NAT.
 
 
 ## 🔒 Security (Seguridad)
