@@ -37,7 +37,7 @@ Conecta tu red local directamente con los puntos de presencia perimetrales (Edge
 - **Caso de uso:** Ideal para empresas que consumen masivamente servicios de Google Workspace o APIs públicas de Google Cloud y ya cuentan con red propia en un colocation de Google.
 - **Nota:** No corre dentro de una VPC y no ofrece garantías de SLA.
 
-### 3. Carrier Peering (Intercambio de Tráfico mediante Proveedor)
+### 3. [Carrier Peering](./carrier-peering.md) (Intercambio de Tráfico mediante Proveedor)
 Similar a Direct Peering, pero la conexión a la red perimetral de Google se realiza a través de un proveedor de servicios de telecomunicaciones asociado (Carrier).
 - **Caso de uso:** Cuando tu empresa no tiene presencia física en un punto de intercambio de tráfico de Google, pero tu proveedor de internet sí.
 
