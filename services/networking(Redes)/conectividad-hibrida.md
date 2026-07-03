@@ -32,7 +32,7 @@ Conexión segura y cifrada a través de la **Internet pública** utilizando tún
 - **Caso de uso:** Ideal para conexiones iniciales, entornos de desarrollo/pruebas o anchos de banda bajos/moderados (hasta 3 Gbps por túnel).
 - **Ventaja:** Despliegue rápido y bajo costo.
 
-### 2. Direct Peering (Intercambio de Tráfico Directo)
+### 2. [Direct Peering](./direct-peering.md) (Intercambio de Tráfico Directo)
 Conecta tu red local directamente con los puntos de presencia perimetrales (Edge Points of Presence) de Google.
 - **Caso de uso:** Ideal para empresas que consumen masivamente servicios de Google Workspace o APIs públicas de Google Cloud y ya cuentan con red propia en un colocation de Google.
 - **Nota:** No corre dentro de una VPC y no ofrece garantías de SLA.

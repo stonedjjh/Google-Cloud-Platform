@@ -36,6 +36,8 @@ Este directorio contiene apuntes, guías conceptuales y documentación técnica 
   Enrutamiento dinámico mediante intercambio de rutas con BGP para VPN, Interconnect y Cloud NAT.
 * [Conectividad Híbrida (Conexiones a la VPC)](./networking(Redes)/conectividad-hibrida.md)  
   Opciones para conectar redes locales y multi-nube a GCP (VPN, Peering e Interconnect).
+* [Direct Peering (Intercambio de Tráfico Directo)](./networking(Redes)/direct-peering.md)  
+  Intercambio de tráfico BGP público y directo con el borde de Google, requisitos y casos de uso.
 
 
 ## 🔒 Security (Seguridad)
