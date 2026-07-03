@@ -34,6 +34,8 @@ Este directorio contiene apuntes, guías conceptuales y documentación técnica 
   Conectividad híbrida cifrada sobre internet, diferencias entre HA VPN (99.99%) y Classic VPN (99.9%).
 * [Cloud Router (Enrutador de Nube)](./networking(Redes)/cloud-router.md)  
   Enrutamiento dinámico mediante intercambio de rutas con BGP para VPN, Interconnect y Cloud NAT.
+* [Conectividad Híbrida (Conexiones a la VPC)](./networking(Redes)/conectividad-hibrida.md)  
+  Opciones para conectar redes locales y multi-nube a GCP (VPN, Peering e Interconnect).
 
 
 ## 🔒 Security (Seguridad)
