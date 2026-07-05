@@ -58,6 +58,20 @@ Establece conexiones físicas directas y privadas desde Google Cloud hacia otras
 
 ---
 
+| Característica | Destino | ¿Pasa por la Internet pública? | ¿Quién pone el enlace físico? | Ancho de banda disponible | ¿Ofrece SLA de Google? | Requisitos técnicos clave |
+|---|---|---|---|---|---|---|
+| Dedicated Interconnect | Interno: A tus VPCs privadas (Rangos RFC 1918) | No. Es un cable físico dedicado. | Tú llevas tu fibra a un centro de datos de Google (Colocation). | Enorme: 10‑100 Gbps. | Sí, hasta 99.99 % (con topología correcta). | Requiere espacio en un Colocation de Google. |
+| Partner Interconnect | Interno: A tus VPCs privadas (Rangos RFC 1918) | No. Es un canal privado a través de un socio. | Un socio autorizado (ej. Equinix, AT&T) ya conectado a Google. | Flexible: 50 Mbps‑10 Gbps. | Sí, hasta 99.99 % (con topología correcta). | No requiere infraestructura física propia en el Colocation. |
+| Cross-Cloud Interconnect | Interno: A tus VPCs privadas (Rangos RFC 1918) | No. Es un cable físico directo entre nubes. | Google tira el cable directo al centro de datos de otra nube (AWS/Azure). | Enorme: 10‑100 Gbps. | Sí, hasta 99.99 % (con topología correcta). | Las cargas de trabajo deben estar en nubes soportadas (AWS, Azure, OCI). |
+| Direct Peering | Público: A Google Workspace, APIs públicas de GCP, YouTube | No. Es una conexión BGP directa en un punto de intercambio. | Tú te conectas directamente en un Punto de Presencia (PoP) de Google. | Variable: depende del contrato con el Carrier. | No. Google no da SLA para Peering. | Requiere ASN propio, IPs públicas registradas y presencia en su PoP. |
+| Carrier Peering | Público: A Google Workspace, APIs públicas de GCP, YouTube | No. Es a través de la red privada de un proveedor (Carrier). | Un proveedor de internet (Carrier) hace el puente por ti. | Variable: depende del contrato con el Carrier. | No. Google no da SLA (el contrato es con tu Carrier). | No necesitas ASN propio ni IPs públicas; el Carrier te los gestiona. |
+
+---
+
+
+
+---
+
 ## Datos Clave
 
 - **¿Pasa por Internet?** 
