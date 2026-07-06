@@ -80,6 +80,9 @@ Los grupos de instancias te permiten administrar múltiples máquinas virtuales 
   * **Auto-healing (Auto-recuperación):** Asocia un *Health Check*. Si una VM deja de responder o reporta fallos, el MIG la destruye y crea una nueva automáticamente a partir de la plantilla. Los rangos de IPs que utiliza Google Cloud para realizar este sondeo son:
     * `35.191.0.0/16`
     * `130.211.0.0/22`
+
+    > [!WARNING]
+    > **Bucle de Reinicios:** Si habilitas *Auto-healing* y no configuras una regla de firewall de entrada (Ingress) que permita el tráfico desde los rangos de IPs de los Health Checks de Google, los sondeos fallarán de forma constante. Como consecuencia, el MIG asumirá que las VMs están caídas y las destruirá y recreará continuamente en un **bucle infinito**.
   * **Autoscaling (Escalado Automático):** Agrega o elimina VMs de forma dinámica según métricas (uso de CPU, capacidad del balanceador de carga o métricas personalizadas de Cloud Monitoring).
   * **Actualizaciones Graduales (Rolling Updates):** Permite actualizar el software o S.O. de las VMs progresivamente sin detener el servicio.
   * **Regional vs. Zonal:** Un MIG regional distribuye las VMs automáticamente en **múltiples zonas de una misma región** para ofrecer Alta Disponibilidad (HA).
@@ -91,7 +94,6 @@ Los grupos de instancias te permiten administrar múltiples máquinas virtuales 
 
 ## Datos Clave
 
-- **Bucle de Reinicios en Auto-healing (Regla de Firewall):** Si habilitas *Auto-healing* y no configuras una regla de firewall que permita la entrada de tráfico desde los rangos de IPs de los Health Checks de Google (`35.191.0.0/16` y `130.211.0.0/22`), los sondeos fallarán de forma constante. Como consecuencia, el MIG asumirá que las VMs están caídas y las destruirá y recreará continuamente en un **bucle infinito**.
 - **Sin Inversión Inicial:** No se requieren inversiones iniciales de capital (CapEx) para adquirir hardware físico. Los costos se manejan como gastos operativos (OpEx), pagando únicamente por los recursos de cómputo consumidos.
 - **Facturación por Segundo con Mínimo:** El uso de las VMs se factura por segundo, lo que permite un control muy preciso de costos. Sin embargo, existe un **cargo mínimo de 1 minuto (60 segundos)** de uso para cualquier instancia iniciada. Después del primer minuto, el cobro es estrictamente por segundo.
 - **Equivalencia con AWS (Imágenes vs AMIs):** Las imágenes de disco (públicas o personalizadas) utilizadas para cargar el sistema operativo de las VMs en GCP son el equivalente directo a las **AMIs (Amazon Machine Images) de AWS**.
