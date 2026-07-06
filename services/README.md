@@ -13,14 +13,22 @@ Este directorio contiene apuntes, guías conceptuales y documentación técnica 
   Creación y administración de máquinas virtuales (VMs), tipos de máquinas, discos y escalamiento.
 * [GKE - Google Kubernetes Engine (Motor de Kubernetes de Google)](./compute(Computo)/GKE.md)  
   Notas sobre la orquestación, administración y escalado de contenedores en GKE.
+* [Cloud Run (Ejecutar contenedores sin servidor)](./compute(Computo)/cloud-run.md)  
+  Plataforma serverless para ejecutar contenedores y aplicaciones sin gestionar infraestructura.
+* [Cloud Run Functions (Funciones sin servidor)](./compute(Computo)/cloud-run-functions.md)  
+  Servicio FaaS para ejecutar fragmentos de código basados en eventos sin gestionar infraestructura.
+
+### 🛠️ DevOps
+* [Cloud Build (CI/CD Serverless)](./compute(Computo)/devops/cloud-build.md)  
+  Plataforma para compilar, probar y desplegar software de forma automática.
 
 
 ## 🌐 Networking (Redes)
-* [VPC - Virtual Private Cloud (Nube Privada Virtual)](./networking(Redes)/VPC.md)  
+* [VPC - Virtual Private Cloud (Nube Privada Virtual)](./networking(Redes)/vpc/VPC.md)  
   Estructura de red en GCP, subredes regionales, firewalls y enrutamiento.
-* [Subnetworks (Subredes)](./networking(Redes)/subnetwork.md)  
+* [Subnetworks (Subredes)](./networking(Redes)/vpc/subnetwork.md)  
   Segmentación regional de la red, direccionamiento IP, rangos secundarios y acceso privado.
-* [Firewall Rules (Reglas de Firewall)](./networking(Redes)/firewall-rules.md)  
+* [Firewall Rules (Reglas de Firewall)](./networking(Redes)/vpc/firewall-rules.md)  
   Control de tráfico entrante y saliente, prioridades, targets y configuraciones de seguridad.
 * [Cloud Load Balancing (Balanceadores de Carga)](./networking(Redes)/load-balancing.md)  
   Distribución de tráfico global y regional, balanceadores L4 y L7, y configuraciones de backend.
@@ -41,6 +49,23 @@ Este directorio contiene apuntes, guías conceptuales y documentación técnica 
 * [Carrier Peering (Intercambio de Tráfico mediante Proveedor)](./networking(Redes)/carrier-peering.md)  
   Conexión indirecta al borde de Google a través de proveedores asociados para servicios públicos.
 
+
+## 💾 Storage (Almacenamiento)
+
+- **Object Storage** – [Cloud Storage.md](./storage(Almacenamiento)/Objecto/Cloud%20Storage.md)  
+  Almacenamiento de objetos y blobs.
+
+- **Cloud SQL** – [Cloud SQL.md](./storage(Almacenamiento)/SQL/Cloud%20SQL.md)  
+  Bases de datos relacionales gestionadas.
+
+- **Spanner** – [spanner.md](./storage(Almacenamiento)/SQL/spanner.md)  
+  Base de datos SQL horizontalmente escalable.
+
+- **Bigtable** – [bigtable.md](./storage(Almacenamiento)/NOSQL/bigtable.md)  
+  Base de datos NoSQL de columnas anchas.
+
+- **Firebase** – [firebase.md](./storage(Almacenamiento)/NOSQL/firebase.md)  
+  Bases de datos en tiempo real y Firestore.
 
 ## 🔒 Security (Seguridad)
 * [IAM - Identity and Access Management (Administración de Accesos)](./security(Seguridad)/IAM.md)  

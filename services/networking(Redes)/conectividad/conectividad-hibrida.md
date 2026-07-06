@@ -41,18 +41,18 @@ Conecta tu red local directamente con los puntos de presencia perimetrales (Edge
 Similar a Direct Peering, pero la conexión a la red perimetral de Google se realiza a través de un proveedor de servicios de telecomunicaciones asociado (Carrier).
 - **Caso de uso:** Cuando tu empresa no tiene presencia física en un punto de intercambio de tráfico de Google, pero tu proveedor de internet sí.
 
-### 4. Dedicated Interconnect (Interconexión Dedicada)
+### 4. [Dedicated Interconnect](./interconnect/dedicated-interconnect.md) (Interconexión Dedicada)
 Conexión física directa mediante un cable de fibra óptica dedicado entre tu red local y la red perimetral de Google.
 - **Caso de uso:** Empresas con demandas masivas de transferencia de datos con velocidades de **10 Gbps o 100 Gbps** por enlace.
 - **SLA:** Ofrece hasta un 99.99% de disponibilidad (requiere topologías redundantes).
 - **Tránsito:** Es un enlace físico privado y exclusivo que **no pasa por la Internet pública**.
 
-### 5. Partner Interconnect (Interconexión de Socios)
+### 5. [Partner Interconnect](./interconnect/partner-interconnect.md) (Interconexión de Socios)
 Conexión física privada a Google Cloud a través de un proveedor de servicios local asociado (partner).
 - **Caso de uso:** Cargas de trabajo críticas que necesitan una conexión privada pero no requieren los anchos de banda masivos de 10 Gbps (admite capacidades de **50 Mbps a 10 Gbps**).
 - **SLA:** Ofrece hasta un 99.99% de disponibilidad.
 
-### 6. Cross-Cloud Interconnect (Interconexión Multi-Nube)
+### 6. [Cross-Cloud Interconnect](./interconnect/cross-cloud-interconnect.md) (Interconexión Multi-Nube)
 Establece conexiones físicas directas y privadas desde Google Cloud hacia otras nubes públicas como AWS o Azure.
 - **Caso de uso:** Arquitecturas multi-nube críticas que transfieren grandes cantidades de datos entre proveedores de nube pública de forma privada y sin pasar por Internet.
 

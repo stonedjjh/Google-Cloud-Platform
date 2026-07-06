@@ -14,3 +14,25 @@ Cuando ejecutas un clúster de GKE, también obtienes los beneficios de las func
 - [Actualizaciones automáticas](https://cloud.google.com/kubernetes-engine/docs/node-auto-upgrade) para el software de nodo del clúster
 - [Reparación automática de los nodos](https://cloud.google.com/kubernetes-engine/docs/how-to/node-auto-repair) para mantenerlos disponibles y en buen estado
 - [Registros y supervisión](https://cloud.google.com/kubernetes-engine/docs/how-to/logging) con Cloud Monitoring para obtener una mayor visibilidad del clúster
+
+ss## Modos de clúster: Standard vs Autopilot
+
+- **Standard**: Tú gestionas la configuración de los nodos (tipo de máquina, tamaño de disco, número de nodos, etc.). Es flexible y permite personalizar la infraestructura, pero requiere mantenimiento de los nodos (actualizaciones, parches, configuración de autoscaling).
+
+- **Autopilot**: GKE gestiona automáticamente los recursos de los nodos. Tú defines solo la carga de trabajo (pods, cuotas de recursos). GKE provisiona y escala los nodos bajo el capó, con precios basados en los recursos solicitados por los pods. Reduce la sobrecarga operativa, pero ofrece menos control sobre la infraestructura subyacente.
+
+**Principales diferencias**
+
+| Característica | Standard | Autopilot |
+|---|---|---|
+| Gestión de nodos | Manual (tú decides) | Automática (GKE) |
+| Facturación | Por nodo (VM) | Por recurso solicitado (CPU, RAM) |
+| Escalado de nodos | Configuras grupos de nodos y autoscaling | Escalado automático gestionado por GKE |
+| Actualizaciones de nodo | Tú ejecutas upgrades | GKE aplica upgrades automáticamente |
+| Opciones de personalización | Amplias (tipo de VM, discos, etiquetas) | Limitadas (solo configuración de pods) |
+| Uso recomendado | Cargas de trabajo con requisitos de infraestructura específicos o híbridas | Cargas de trabajo que prefieren gestión operativa mínima y facturación basada en uso |
+
+
+## Datos Clave
+
+- Los recursos para los clústeres provienen de **Computer Engineer**.
