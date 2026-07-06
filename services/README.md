@@ -9,13 +9,19 @@ Este directorio contiene apuntes, guías conceptuales y documentación técnica 
   Detalles sobre la infraestructura global de Google, regiones y zonas, seguridad por diseño y conceptos de computación en la nube (IaaS, PaaS, SaaS).
 
 ## 🖥️ Compute (Cómputo)
+
+### 🏗️ IaaS y Orquestación (Administración de Infraestructura)
 * [Compute Engine (Máquinas Virtuales)](./compute(Computo)/compute-engine.md)  
   Creación y administración de máquinas virtuales (VMs), tipos de máquinas, discos y escalamiento.
-* [GKE - Google Kubernetes Engine (Motor de Kubernetes de Google)](./compute(Computo)/GKE.md)  
+* [GKE - Google Kubernetes Engine (Motor de Kubernetes)](./compute(Computo)/GKE.md)  
   Notas sobre la orquestación, administración y escalado de contenedores en GKE.
-* [Cloud Run (Ejecutar contenedores sin servidor)](./compute(Computo)/cloud-run.md)  
+
+### ☁️ Serverless (Sin Servidor - PaaS / FaaS)
+* [App Engine (Plataforma para Aplicaciones - PaaS)](./compute(Computo)/app-engine.md)  
+  Alojamiento y escalado automático de aplicaciones web en entornos Estándar y Flexible.
+* [Cloud Run (Contenedores Serverless - PaaS)](./compute(Computo)/cloud-run.md)  
   Plataforma serverless para ejecutar contenedores y aplicaciones sin gestionar infraestructura.
-* [Cloud Run Functions (Funciones sin servidor)](./compute(Computo)/cloud-run-functions.md)  
+* [Cloud Run Functions (Funciones sin servidor - FaaS)](./compute(Computo)/cloud-run-functions.md)  
   Servicio FaaS para ejecutar fragmentos de código basados en eventos sin gestionar infraestructura.
 
 ### 🛠️ DevOps
