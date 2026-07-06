@@ -4,27 +4,27 @@ Este directorio contiene la documentación de los servicios de red de Google Clo
 
 ## 📂 Estructura propuesta
 
-networking(Redes)/
 ├─ conectividad/          # Conectividad externa (peering, VPN, Interconnect)
-│   ├─ [direct-peering.md](file:///c:/cloud/GCP%20LAB/Google-Cloud-Platform/services/networking(Redes)/conectividad/direct-peering.md)
-│   ├─ [carrier-peering.md](file:///c:/cloud/GCP%20LAB/Google-Cloud-Platform/services/networking(Redes)/conectividad/carrier-peering.md)
-│   ├─ [conectividad-hibrida.md](file:///c:/cloud/GCP%20LAB/Google-Cloud-Platform/services/networking(Redes)/conectividad-hibrida.md)
+│   ├─ [direct-peering.md](./conectividad/direct-peering.md)
+│   ├─ [carrier-peering.md](./conectividad/carrier-peering.md)
+│   ├─ [conectividad-hibrida.md](./conectividad/conectividad-hibrida.md)
 │   ├─ vpn/                # Classic VPN y HA VPN
-│   │   └─ [cloud-vpn.md](file:///c:/cloud/GCP%20LAB/Google-Cloud-Platform/services/networking(Redes)/conectividad/vpn/cloud-vpn.md)
+│   │   └─ [cloud-vpn.md](./conectividad/vpn/cloud-vpn.md)
 │   └─ interconnect/       # Dedicated & Partner 
-│       ├─ [dedicated-interconnect.md](file:///c:/cloud/GCP%20LAB/Google-Cloud-Platform/services/networking(Redes)/conectividad/interconnect/dedicated-interconnect.md)
-│       └─ [partner-interconnect.md](file:///c:/cloud/GCP%20LAB/Google-Cloud-Platform/services/networking(Redes)/conectividad/interconnect/partner-interconnect.md)
-
+│       ├─ [dedicated-interconnect.md](./conectividad/interconnect/dedicated-interconnect.md)
+│       ├─ [partner-interconnect.md](./conectividad/interconnect/partner-interconnect.md)
+│       └─ [cross-cloud-interconnect.md](./conectividad/interconnect/cross-cloud-interconnect.md)
+│
 ├─ vpc/                  # Componentes internos de la VPC
-│   ├─ [VPC.md](file:///c:/cloud/GCP%20LAB/Google-Cloud-Platform/services/networking(Redes)/vpc/VPC.md)
-│   ├─ [subnetwork.md](file:///c:/cloud/GCP%20LAB/Google-Cloud-Platform/services/networking(Redes)/vpc/subnetwork.md)
-│   ├─ [firewall-rules.md](file:///c:/cloud/GCP%20LAB/Google-Cloud-Platform/services/networking(Redes)/vpc/firewall-rules.md)
-│   └─ [cloud-router.md](file:///c:/cloud/GCP%20LAB/Google-Cloud-Platform/services/networking(Redes)/vpc/cloud-router.md)
-
-├─ [load-balancing.md](file:///c:/cloud/GCP%20LAB/Google-Cloud-Platform/services/networking(Redes)/load-balancing.md)
-├─ [cloud-cdn.md](file:///c:/cloud/GCP%20LAB/Google-Cloud-Platform/services/networking(Redes)/cloud-cdn.md)
-├─ [cloud-dns.md](file:///c:/cloud/GCP%20LAB/Google-Cloud-Platform/services/networking(Redes)/cloud-dns.md)
-├─ [Health-Checks-Legacy-vs-Global.md](file:///c:/cloud/GCP%20LAB/Google-Cloud-Platform/services/networking(Redes)/Health-Checks-Legacy-vs-Global.md)
+│   ├─ [VPC.md](./vpc/VPC.md)
+│   ├─ [subnetwork.md](./vpc/subnetwork.md)
+│   ├─ [firewall-rules.md](./vpc/firewall-rules.md)
+│   └─ [cloud-router.md](./vpc/cloud-router.md)
+│
+├─ [load-balancing.md](./load-balancing.md)
+├─ [cloud-cdn.md](./cloud-cdn.md)
+├─ [cloud-dns.md](./cloud-dns.md)
+├─ [Health-Checks-Legacy-vs-Global.md](./Health-Checks-Legacy-vs-Global.md)
 
 ## 📖 Guías rápidas
 

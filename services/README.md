@@ -25,11 +25,13 @@ Este directorio contiene apuntes, guías conceptuales y documentación técnica 
 
 ## 🌐 Networking (Redes)
 * [VPC - Virtual Private Cloud (Nube Privada Virtual)](./networking(Redes)/vpc/VPC.md)  
-  Estructura de red en GCP, subredes regionales, firewalls y enrutamiento.
+  Estructura de red global en GCP, modos de creación, enrutamiento, VPC Peering y Shared VPC.
 * [Subnetworks (Subredes)](./networking(Redes)/vpc/subnetwork.md)  
   Segmentación regional de la red, direccionamiento IP, rangos secundarios y acceso privado.
 * [Firewall Rules (Reglas de Firewall)](./networking(Redes)/vpc/firewall-rules.md)  
   Control de tráfico entrante y saliente, prioridades, targets y configuraciones de seguridad.
+* [Cloud Router (Enrutador de Nube)](./networking(Redes)/vpc/cloud-router.md)  
+  Enrutamiento dinámico mediante intercambio de rutas con BGP para VPN, Interconnect y Cloud NAT.
 * [Cloud Load Balancing (Balanceadores de Carga)](./networking(Redes)/load-balancing.md)  
   Distribución de tráfico global y regional, balanceadores L4 y L7, y configuraciones de backend.
 * [Health Checks - Legacy vs. Global (Verificaciones de Estado)](./networking(Redes)/Health-Checks-Legacy-vs-Global.md)  
@@ -38,16 +40,21 @@ Este directorio contiene apuntes, guías conceptuales y documentación técnica 
   Zonas públicas y privadas, DNS de horizonte dividido, DNSSEC y resoluciones en entornos híbridos.
 * [Cloud CDN (Content Delivery Network)](./networking(Redes)/cloud-cdn.md)  
   Almacenamiento en caché en puntos perimetrales, integración con balanceadores de carga, URLs firmadas e invalidación.
-* [Cloud VPN (Virtual Private Network)](./networking(Redes)/cloud-vpn.md)  
-  Conectividad híbrida cifrada sobre internet, diferencias entre HA VPN (99.99%) y Classic VPN (99.9%).
-* [Cloud Router (Enrutador de Nube)](./networking(Redes)/cloud-router.md)  
-  Enrutamiento dinámico mediante intercambio de rutas con BGP para VPN, Interconnect y Cloud NAT.
-* [Conectividad Híbrida (Conexiones a la VPC)](./networking(Redes)/conectividad-hibrida.md)  
+* [Conectividad Híbrida (Conexiones a la VPC)](./networking(Redes)/conectividad/conectividad-hibrida.md)  
   Opciones para conectar redes locales y multi-nube a GCP (VPN, Peering e Interconnect).
-* [Direct Peering (Intercambio de Tráfico Directo)](./networking(Redes)/direct-peering.md)  
+* [Cloud VPN (Virtual Private Network)](./networking(Redes)/conectividad/vpn/cloud-vpn.md)  
+  Conectividad híbrida cifrada sobre internet, diferencias entre HA VPN (99.99%) y Classic VPN (99.9%).
+* [Direct Peering (Intercambio de Tráfico Directo)](./networking(Redes)/conectividad/direct-peering.md)  
   Intercambio de tráfico BGP público y directo con el borde de Google, requisitos y casos de uso.
-* [Carrier Peering (Intercambio de Tráfico mediante Proveedor)](./networking(Redes)/carrier-peering.md)  
+* [Carrier Peering (Intercambio de Tráfico mediante Proveedor)](./networking(Redes)/conectividad/carrier-peering.md)  
   Conexión indirecta al borde de Google a través de proveedores asociados para servicios públicos.
+* [Dedicated Interconnect (Interconexión Dedicada)](./networking(Redes)/conectividad/interconnect/dedicated-interconnect.md)  
+  Enlace físico de fibra óptica de alta velocidad (10/100 Gbps) directo a Google Cloud.
+* [Partner Interconnect (Interconexión de Socios)](./networking(Redes)/conectividad/interconnect/partner-interconnect.md)  
+  Enlace privado a través de un proveedor para anchos de banda flexibles (50 Mbps a 10 Gbps).
+* [Cross-Cloud Interconnect (Interconexión Multi-Nube)](./networking(Redes)/conectividad/interconnect/cross-cloud-interconnect.md)  
+  Conexiones físicas dedicadas y privadas entre GCP y otras nubes (AWS/Azure).
+
 
 
 ## 💾 Storage (Almacenamiento)

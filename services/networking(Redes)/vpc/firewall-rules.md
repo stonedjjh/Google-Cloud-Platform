@@ -106,4 +106,6 @@ resource "google_compute_firewall" "deny-all-egress" {
 - **Prioridad:** Si dos reglas se contradicen, se aplica la que tenga mayor prioridad (número menor).
 - **Orden de evaluación:** Las reglas se evalúan en orden ascendente de prioridad; la primera coincidencia se aplica.
 - **Acción allow/deny:** Cada regla especifica si permite o deniega el tráfico según los criterios definidos.
+- **Capas de Operación (L3/L4):** Las reglas de firewall operan estrictamente en las **Capas 3 (Red) y 4 (Transporte)** del modelo OSI. Filtran por IP de origen/destino, protocolo y puertos; no pueden inspeccionar el contenido del paquete ni filtrar en la Capa 7 (Aplicación).
+
 

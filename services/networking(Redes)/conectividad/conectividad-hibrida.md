@@ -27,7 +27,7 @@ graph LR
 
 ## Opciones de Conectividad
 
-### 1. [Cloud VPN](./cloud-vpn.md)
+### 1. [Cloud VPN](./vpn/cloud-vpn.md)
 Conexión segura y cifrada a través de la **Internet pública** utilizando túneles IPsec.
 - **Caso de uso:** Ideal para conexiones iniciales, entornos de desarrollo/pruebas o anchos de banda bajos/moderados (hasta 3 Gbps por túnel).
 - **Ventaja:** Despliegue rápido y bajo costo.
@@ -75,10 +75,10 @@ Establece conexiones físicas directas y privadas desde Google Cloud hacia otras
 ## Datos Clave
 
 - **¿Pasa por Internet?** 
-  - **Sí:** [Cloud VPN](./cloud-vpn.md) viaja encriptado sobre la Internet pública.
+  - **Sí:** [Cloud VPN](./vpn/cloud-vpn.md) viaja encriptado sobre la Internet pública.
   - **No:** Dedicated Interconnect, Partner Interconnect y Cross-Cloud Interconnect son **enlaces físicos privados y dedicados**.
-- **Requisito de Cloud Router:** Tanto para **HA VPN** como para **Cloud Interconnect** (Dedicated, Partner y Cross-Cloud), es estrictamente obligatorio el uso de [Cloud Router](./cloud-router.md) para gestionar el intercambio dinámico de rutas BGP.
+- **Requisito de Cloud Router:** Tanto para **HA VPN** como para **Cloud Interconnect** (Dedicated, Partner y Cross-Cloud), es estrictamente obligatorio el uso de [Cloud Router](../vpc/cloud-router.md) para gestionar el intercambio dinámico de rutas BGP.
 - **¿Cuál elegir?** 
-  - Si el volumen de datos es bajo/medio y el costo es un factor limitante: **Cloud VPN**.
+  - Si el volumen de datos es bajo/medio y el costo es un factor limitante: [Cloud VPN](./vpn/cloud-vpn.md).
   - Si requieres alto rendimiento y tu red física coincide con un colocation de Google: **Dedicated Interconnect**.
   - Si requieres conexión privada dedicada pero menor ancho de banda (ej: 200 Mbps): **Partner Interconnect**.
