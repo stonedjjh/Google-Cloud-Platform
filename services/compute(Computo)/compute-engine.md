@@ -66,6 +66,27 @@ Compute Engine ofrece esquemas de descuento para reducir costos en cargas de tra
   - **Por Contrato:** Requieren un compromiso formal de compra de recursos (vCPUs, memoria, GPUs, etc.) por un periodo de **1 o 3 años**.
   - **Funcionamiento:** Son ideales para cargas de trabajo estables y predecibles. A cambio de este compromiso, obtienes descuentos masivos (hasta un 57% en máquinas estándar y hasta un 70% en optimizadas para memoria). *(Es el equivalente a las Reserved Instances / Savings Plans de AWS).*
 
+## Grupos de Instancias (Instance Groups)
+
+Los grupos de instancias te permiten administrar múltiples máquinas virtuales como una sola entidad. En Compute Engine existen dos tipos de grupos:
+
+### 1. Plantilla de Instancia (Instance Template)
+* Es un recurso **global** que define la configuración de las VMs (sistema operativo, tamaño de disco, tipo de máquina, etiquetas de red, etc.).
+* **Regla de examen:** Una plantilla de instancia **es inmutable**. Una vez creada, no se puede editar. Si necesitas cambiar algo, debes crear una nueva versión de la plantilla y actualizar el grupo de instancias con ella.
+
+### 2. Grupos de Instancias Administrados (MIG - Managed Instance Groups)
+* Utilizan una **Plantilla de Instancia** para crear un grupo de VMs **idénticas**.
+* **Características Clave:**
+  * **Auto-healing (Auto-recuperación):** Asocia un *Health Check*. Si una VM deja de responder o reporta fallos, el MIG la destruye y crea una nueva automáticamente a partir de la plantilla.
+  * **Autoscaling (Escalado Automático):** Agrega o elimina VMs de forma dinámica según métricas (uso de CPU, capacidad del balanceador de carga o métricas personalizadas de Cloud Monitoring).
+  * **Actualizaciones Graduales (Rolling Updates):** Permite actualizar el software o S.O. de las VMs progresivamente sin detener el servicio.
+  * **Regional vs. Zonal:** Un MIG regional distribuye las VMs automáticamente en **múltiples zonas de una misma región** para ofrecer Alta Disponibilidad (HA).
+  * **Uso en otros servicios:** Los clústeres de GKE utilizan MIGs por debajo para administrar sus grupos de nodos (*Node Pools*), y los balanceadores de carga los usan como backends de destino de tráfico.
+
+### 3. Grupos de Instancias No Administrados (UMIG - Unmanaged Instance Groups)
+* Agrupan máquinas virtuales que son **diferentes entre sí** (diferente S.O., tamaño o configuración).
+* **Restricción de examen:** **NO soportan** ni autoscaling, ni auto-healing, ni plantillas de instancias. Solo sirven para distribuir tráfico con un balanceador de carga hacia VMs existentes que ya tenías creadas por separado.
+
 ## Datos Clave
 
 - **Sin Inversión Inicial:** No se requieren inversiones iniciales de capital (CapEx) para adquirir hardware físico. Los costos se manejan como gastos operativos (OpEx), pagando únicamente por los recursos de cómputo consumidos.
