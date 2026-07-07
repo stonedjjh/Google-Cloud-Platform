@@ -87,3 +87,13 @@ Esta guía recopila definiciones, palabras clave ("triggers") y casos de uso de 
 *   **Definición:** Monitorea continuamente el consumo de recursos de CPU y memoria de tu aplicación en producción para identificar funciones de código ineficientes que incrementan los costos.
 *   **Palabras Clave (Keywords):** *Consumo de CPU/Memoria en código*, *Optimización de código*, *Llamadas a funciones costosas*.
 *   **Caso de Uso de Examen:** Quieres optimizar el código de tu servidor para reducir el consumo de recursos y ahorrar costos, localizando las líneas y funciones específicas que más memoria consumen durante su ejecución ordinaria.
+
+---
+
+## 💾 Bases de Datos
+
+### 🛢️ AlloyDB for PostgreSQL
+*   **Definición:** Servicio de base de datos relacional totalmente gestionado y 100 % compatible con PostgreSQL, diseñado para las cargas de trabajo empresariales más exigentes. Combina lo mejor de Google (escalabilidad y almacenamiento desacoplado) con motores optimizados que multiplican el rendimiento transaccional (hasta 4 veces más rápido) y analítico (hasta 100 veces más rápido) frente a un PostgreSQL estándar.
+*   **Palabras Clave (Keywords):** *PostgreSQL empresarial de alto rendimiento*, *HTAP (Híbrido Transaccional y Analítico)*, *Almacenamiento columnar en memoria*, *Compatibilidad completa con PostgreSQL*, *Auto-escalabilidad de almacenamiento sin downtime*.
+*   **Caso de Uso de Examen:** Tienes una aplicación crítica basada en PostgreSQL local con alta carga de lecturas transaccionales y análisis en tiempo real. Deseas migrarla a un servicio administrado en la nube que ofrezca un rendimiento masivamente superior pero que mantenga compatibilidad absoluta con tus consultas y extensiones actuales de PostgreSQL.
+
