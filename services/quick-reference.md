@@ -42,6 +42,15 @@ Esta guia recopila definiciones, palabras clave ("triggers") y casos de uso de s
 
 ---
 
+## Identidad y Acceso
+
+### Workload Identity Federation
+*   **Definicion:** Permite que cargas de trabajo externas a GCP (como servidores locales, AWS o Azure) se autentiquen de forma segura en Google Cloud utilizando sus identidades existentes, eliminando la necesidad de descargar llaves JSON de cuentas de servicio.
+*   **Palabras Clave (Keywords):** *Eliminar llaves JSON externas*, *Autenticar AWS/Azure/On-Premises en GCP*, *Federacion OIDC/SAML*, *Acceso seguro de maquina a maquina fuera de GCP*.
+*   **Caso de Uso de Examen:** Un pipeline de despliegue en GitHub Actions o un servidor en tu data center local necesita subir archivos a un bucket de Cloud Storage, pero las politicas de seguridad prohiben estrictamente la creacion y descarga de llaves JSON manuales.
+
+---
+
 ## Integracion de Aplicaciones y DevOps
 
 ### Cloud Tasks
