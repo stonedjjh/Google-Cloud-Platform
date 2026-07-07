@@ -88,6 +88,44 @@ resource "google_compute_firewall" "deny-all-egress" {
    ```
 5. **Auditar** mediante Cloud Logging y ajustar según hallazgos.
 
+## Políticas de Firewall (Firewall Policies)
+
+Las Políticas de Firewall de Red representan el estándar moderno de seguridad de red en Google Cloud. A diferencia de las reglas tradicionales vinculadas individualmente a una VPC, las políticas actúan como contenedores de reglas que se pueden aplicar y reutilizar a nivel global o regional.
+
+### Tipos de Políticas de Firewall
+
+1. **Hierarchical Firewall Policies (Políticas Jerárquicas):** 
+   - Se asocian a nivel de **Organización** o de **Carpeta (Folder)**.
+   - Permiten a los administradores de seguridad definir reglas globales obligatorias que se heredan automáticamente en todos los proyectos de la estructura (por ejemplo, bloquear todo el tráfico externo por defecto a puertos de administración).
+2. **Global Network Firewall Policies (Políticas de Red Globales):** 
+   - Se asocian a una red **VPC** específica y se aplican a todas sus subredes en todas las regiones.
+3. **Regional Network Firewall Policies (Políticas de Red Regionales):** 
+   - Se asocian a una red **VPC** pero su alcance está restringido a una sola región geográfica.
+
+### Orden de Evaluación de Reglas
+
+GCP evalúa las políticas y reglas en orden descendente según la jerarquía del árbol de recursos:
+
+```mermaid
+graph TD
+    Org["1. Políticas Jerárquicas (Organización)"] --> Folder["2. Políticas Jerárquicas (Carpetas)"]
+    Folder --> GlobalVPC["3. Políticas de Red Globales (VPC)"]
+    GlobalVPC --> RegionalVPC["4. Políticas de Red Regionales (VPC)"]
+    RegionalVPC --> LegacyRules["5. Reglas de Firewall de VPC (Legadas)"]
+
+    style Org fill:#4285F4,color:#fff
+    style Folder fill:#FBBC05,color:#333
+    style GlobalVPC fill:#34A853,color:#fff
+    style RegionalVPC fill:#34A853,color:#fff
+    style LegacyRules fill:#EA4335,color:#fff
+```
+
+### Ventajas sobre las Reglas Tradicionales
+
+- **Reusabilidad:** Permiten escribir un conjunto de reglas una sola vez y asociarlo a múltiples redes VPC simultáneamente.
+- **Secure Tags (Etiquetas de IAM):** En lugar de las etiquetas de red comunes (Network Tags), las políticas soportan *Secure Tags*, que están protegidas por permisos específicos de IAM. Esto evita que desarrolladores sin privilegios se salten el firewall cambiando las etiquetas de sus máquinas virtuales.
+- **Acción GOTO_NEXT:** Las políticas jerárquicas permiten configurar la acción `GOTO_NEXT` para delegar la decisión de permitir o denegar el tráfico a las políticas o reglas de niveles inferiores.
+
 ## Enlaces relacionados
 - **[Documentación oficial de firewall de VPC](https://cloud.google.com/vpc/docs/firewalls)** – guía completa, conceptos y ejemplos.
 - **[Ejemplos de Terraform para firewall](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_firewall)**
