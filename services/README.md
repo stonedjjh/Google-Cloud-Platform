@@ -38,6 +38,8 @@ Este directorio contiene apuntes, guías conceptuales y documentación técnica 
   Control de tráfico entrante y saliente, prioridades, targets y configuraciones de seguridad.
 * [Cloud Router (Enrutador de Nube)](./networking(Redes)/vpc/cloud-router.md)  
   Enrutamiento dinámico mediante intercambio de rutas con BGP para VPN, Interconnect y Cloud NAT.
+* [Cloud NAT (Traducción de Direcciones de Red)](./networking(Redes)/vpc/cloud-nat.md)  
+  Servicio administrado para dar salida segura a Internet a instancias sin dirección IP pública.
 * [Cloud Load Balancing (Balanceadores de Carga)](./networking(Redes)/load-balancing.md)  
   Distribución de tráfico global y regional, balanceadores L4 y L7, y configuraciones de backend.
 * [Health Checks - Legacy vs. Global (Verificaciones de Estado)](./networking(Redes)/Health-Checks-Legacy-vs-Global.md)  
