@@ -7,6 +7,8 @@ Este directorio contiene apuntes, guías conceptuales y documentación técnica 
 ## 🌐 General (Conceptos Globales)
 * [GCP General Concepts (Conceptos de Google Cloud Platform)](./GCP.md)  
   Detalles sobre la infraestructura global de Google, regiones y zonas, seguridad por diseño y conceptos de computación en la nube (IaaS, PaaS, SaaS).
+* [⚡ GCP Quick Reference Guide (Guía Rápida de Servicios para Examen)](./quick-reference.md)  
+  Conceptos clave, definiciones directas y palabras clave de servicios secundarios comunes en preguntas de certificación.
 
 ## 🖥️ Compute (Cómputo)
 
