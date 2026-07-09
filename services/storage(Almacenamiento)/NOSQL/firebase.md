@@ -10,6 +10,7 @@ Firebase es una plataforma de Google Cloud que ofrece servicios integrados para 
 - **Sincronización en tiempo real**: Cambios en los datos se replican instantáneamente a todos los clientes suscritos.
 - **Seguridad integrada**: Reglas de seguridad basadas en Firebase Authentication e IAM; cifrado en reposo y en tránsito (HTTPS/TLS).
 - **Escalabilidad automática**: La capacidad se ajusta automáticamente según la carga sin intervención manual.
+- **Modos de operación (Nativo vs. Datastore)**: Cloud Firestore puede funcionar en dos modos sobre la misma infraestructura: el **Modo Nativo**, optimizado para las funciones de tiempo real y caché en el cliente móvil/web, y el **Modo Datastore**, que desactiva el tiempo real para enfocarse en backends tradicionales de alta escala, operaciones servidor a servidor y total compatibilidad con aplicaciones heredadas de App Engine.
 
 ## Datos clave
 - **Tamaño**: Ilimitado; se paga por uso (pay‑as‑you‑go) según la cantidad de lecturas, escrituras y almacenamiento.
