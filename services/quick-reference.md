@@ -107,3 +107,18 @@ Esta guia recopila definiciones, palabras clave ("triggers") y casos de uso de s
 *   **Definicion:** Servicio de base de datos relacional totalmente gestionado y 100 % compatible con PostgreSQL, diseñado para las cargas de trabajo empresariales mas exigentes. Combina lo mejor de Google (escalabilidad y almacenamiento desacoplado) con motores optimizados que multiplican el rendimiento transaccional (hasta 4 veces mas rapido) y analitico (hasta 100 veces mas rapido) frente a un PostgreSQL estandar.
 *   **Palabras Clave (Keywords):** *PostgreSQL empresarial de alto rendimiento*, *HTAP (Hibrido Transaccional y Analitico)*, *Almacenamiento columnar en memoria*, *Compatibilidad completa con PostgreSQL*, *Auto-escalabilidad de almacenamiento sin downtime*.
 *   **Caso de Uso de Examen:** Tienes una aplicacion critica basada en PostgreSQL local con alta carga de lecturas transaccionales y analisis en tiempo real. Deseas migrarla a un servicio administrado en la nube que ofrezca un rendimiento masivamente superior pero que mantenga compatibilidad absoluta con tus consultas y extensiones actuales de PostgreSQL.
+
+---
+
+## Procesamiento y Análisis de Datos (Big Data)
+
+### Cloud Dataflow
+*   **Definicion:** Servicio de procesamiento de datos completamente gestionado y serverless basado en Apache Beam. Permite ejecutar tuberías (pipelines) de datos a gran escala automatizando el aprovisionamiento y el escalado de los recursos de cómputo.
+*   **Palabras Clave (Keywords):** *Unified Stream and Batch*, *Procesamiento en tiempo real (Streaming)*, *Serverless Big Data*, *Apache Beam*, *Transformación de datos al vuelo (ETL)*.
+*   **Caso de Uso de Examen:** Necesitas construir un pipeline completamente serverless que reciba datos de telemetria en tiempo real desde Cloud Pub/Sub, limpie y transforme los datos JSON al vuelo, y los envíe inmediatamente a un modelo de Machine Learning y a una base de datos NoSQL sin administrar servidores.
+
+### Cloud Dataproc
+*   **Definicion:** Servicio administrado para ejecutar clústeres de Apache Hadoop y Apache Spark. Permite migrar entornos tradicionales de Big Data a la nube de forma rápida, delegando la creación, gestión y apagado de las máquinas virtuales a GCP.
+*   **Palabras Clave (Keywords):** *Hadoop / Spark*, *Hive / Pig / Flink*, *Migración Lift-and-Shift de Big Data*, *Ecosistema de código abierto (OSS)*, *Procesamiento por lotes (Batch) heredado*.
+*   **Caso de Uso de Examen:** Tu equipo de ciencia de datos tiene un entorno local con clústeres de Hadoop y procesos masivos escritos en Apache Spark para análisis histórico. Debes migrar estos flujos de trabajo a GCP antes del fin de semana minimizando el esfuerzo de reescritura de código y manteniendo las mismas herramientas.
+
