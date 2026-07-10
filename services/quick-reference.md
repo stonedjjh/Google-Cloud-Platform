@@ -10,6 +10,8 @@ Esta guia recopila definiciones, palabras clave ("triggers") y casos de uso de s
 *   **Definicion:** Filtro de seguridad perimetral y Firewall de Aplicacion Web (WAF) que protege servicios frente a ataques DDoS y exploits web comunes. Se integra directamente con HTTP(S) Load Balancing.
 *   **Palabras Clave (Keywords):** *Proteccion DDoS*, *WAF*, *OWASP Top 10*, *Geobloqueo (bloquear por pais)*, *Lista blanca/negra de IPs*, *Prevenir inyeccion SQL (SQLi) o Cross-Site Scripting (XSS)*.
 *   **Caso de Uso de Examen:** Necesitas asegurar que tu aplicacion web detras de un balanceador de carga global HTTPS solo sea accesible desde IPs corporativas de tu pais y bloquear cualquier intento de ataque de inyeccion de codigo.
+*   **Restricción de Examen:** Cloud Armor **no** se puede asociar directamente a instancias de Compute Engine (VMs). Se debe aplicar en el perímetro a través de un balanceador de carga (HTTP/S Load Balancer) o Cloud CDN.
+
 
 ### Cloud NAT (Network Address Translation)
 *   **Definicion:** Permite que instancias de VM sin direcciones IP publicas accedan a internet para actualizaciones o parches, bloqueando conexiones entrantes no deseadas desde el exterior.
