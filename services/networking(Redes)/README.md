@@ -17,6 +17,8 @@ Este directorio contiene la documentación de los servicios de red de Google Clo
 │
 ├─ vpc/                  # Componentes internos de la VPC
 │   ├─ [VPC.md](./vpc/VPC.md)
+│   ├─ [shared-vpc.md](./vpc/shared-vpc.md)
+│   ├─ [vm-migration.md](./vpc/vm-migration.md)
 │   ├─ [subnetwork.md](./vpc/subnetwork.md)
 │   ├─ [firewall-rules.md](./vpc/firewall-rules.md)
 │   └─ [cloud-router.md](./vpc/cloud-router.md)
