@@ -9,6 +9,11 @@ Este directorio contiene apuntes, guías conceptuales y documentación técnica 
   Detalles sobre la infraestructura global de Google, regiones y zonas, seguridad por diseño y conceptos de computación en la nube (IaaS, PaaS, SaaS).
 * [⚡ GCP Quick Reference Guide (Guía Rápida de Servicios para Examen)](./quick-reference.md)  
   Conceptos clave, definiciones directas y palabras clave de servicios secundarios comunes en preguntas de certificación.
+## 🏛️ Architecture & SRE (Arquitectura y Operaciones)
+* [Google Cloud Architecture Framework](./architecture-and-sre(Arquitectura-y-SRE)/README.md)  
+  Los 6 pilares de arquitectura de Google Cloud (System Design, Operational Excellence, Security, Reliability, Cost, Performance).
+* [Fundamentos de SRE (SLI, SLO, SLA, KPI)](./architecture-and-sre(Arquitectura-y-SRE)/fundamentos-sre.md)  
+  Definiciones clave para ingeniería de confiabilidad, presupuestos de error (Error Budgets) e historias de usuario.
 
 ## 🖥️ Compute (Cómputo)
 

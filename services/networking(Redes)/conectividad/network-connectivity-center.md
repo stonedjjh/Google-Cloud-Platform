@@ -25,3 +25,30 @@ NCC te permite integrar dispositivos virtuales de red (NVA - Network Virtual App
 
 ### 4. Gestión Centralizada de Parámetros Multisitio
 NCC facilita la administración central de configuraciones de enrutamiento y políticas entre todos tus sitios locales externos (On-Prem) y la infraestructura de Google Cloud.
+
+---
+
+## 🛠️ Guía de Referencia: NCC como Concentrador de Tránsito (Transit Hub)
+
+*(Basado en los conceptos del laboratorio **GSP911**: Set Up Network Connectivity Center as a Transit Hub)*
+
+Si necesitas conectar dos sitios externos (ej. On-Premise A en Nueva York y On-Premise B en Londres) usando Google Cloud como intermediario (WAN), la arquitectura *Hub-and-Spoke* de NCC es el camino ideal.
+
+### Terminología Clave
+1.  **Hub (Concentrador):** Un recurso de NCC global que actúa como el núcleo central de enrutamiento.
+2.  **Spoke (Radio/Enlace):** Un recurso de red individual que adjuntas al Hub. En este caso, serán los túneles HA VPN o VLAN Attachments (Interconnect) que vienen de tus sitios externos.
+
+### Flujo de Configuración General
+1.  **Preparar la Infraestructura Base:**
+    *   Crear una red VPC base y Cloud Routers en las regiones correspondientes a donde aterrizarán tus conexiones externas.
+    *   Levantar los túneles HA VPN o conexiones Cloud Interconnect desde tus routers locales hacia los Cloud Routers de Google.
+2.  **Crear el Hub de NCC:**
+    *   Desde la consola de *Network Connectivity*, creas un nuevo "Hub" global vacío.
+3.  **Adjuntar los Spokes al Hub:**
+    *   Creas un Spoke para el Sitio A y lo vinculas a los túneles VPN/Interconnect de la primera ubicación. 
+    *   > [!IMPORTANT]
+    > Al crear el Spoke, debes habilitar explícitamente la opción de **Transferencia de datos de sitio a sitio (Site-to-site data transfer)** para que Google permita que el tráfico cruce su red.
+    *   Creas un segundo Spoke para el Sitio B vinculado a la segunda ubicación, también con la transferencia de datos habilitada.
+4.  **Enrutamiento Dinámico Automático (Magia del BGP):**
+    *   Al adjuntar ambos Spokes al Hub con la opción de transferencia activada, NCC configura automáticamente los Cloud Routers subyacentes.
+    *   El Cloud Router de la ubicación A anunciará automáticamente las rutas del Sitio A hacia el Cloud Router de la ubicación B, y este último se las pasará al Sitio B. El tráfico ahora fluirá de un sitio a otro atravesando la red troncal global de Google de forma rápida y segura.
