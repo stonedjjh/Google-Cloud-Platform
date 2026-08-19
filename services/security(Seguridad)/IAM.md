@@ -114,6 +114,40 @@ graph LR
 > **Tip sobre Seguridad de Claves (Examen):**
 > Para minimizar riesgos, prefiere siempre la **autenticación automática / claves administradas por Google** (donde GCP las rota automáticamente cada día). Evita descargar y utilizar claves administradas por el usuario (Service Account Keys en JSON) a menos que la carga de trabajo esté fuera de GCP (como una aplicación On-Premise). Si usas claves JSON, es tu responsabilidad rotarlas periódicamente.
 
+### IAM Conditions (Condiciones IAM)
+
+Las **IAM Conditions** te permiten definir políticas de acceso condicionales para los recursos de Google Cloud. Es decir, el permiso solo se concede si se cumple una expresión condicional basada en atributos de la solicitud (como el tiempo, el recurso o la dirección IP de origen).
+
+```mermaid
+graph TD
+    A[Usuario solicita acceso] --> B{¿Cumple la condición?}
+    B -- Sí --> C[Acceso Concedido]
+    B -- No --> D[Acceso Denegado]
+
+    style A fill:#4285F4,color:#fff
+    style B fill:#FBBC05,color:#333
+    style C fill:#34A853,color:#fff
+    style D fill:#EA4335,color:#fff
+```
+
+#### Atributos principales para configurar condiciones:
+
+1. **Fecha/Hora (Temporal):**
+   - Permite otorgar acceso que expira automáticamente en un momento determinado o que solo es válido durante ciertas horas del día (ej. horario de oficina).
+   - *Ejemplo de uso:* Otorgar temporalmente permisos de administrador a un contratista externo hasta el fin de mes.
+
+2. **Atributos de Recurso (Nombre, Tipo, Servicio):**
+   - Restringe el rol a recursos que coincidan con un prefijo de nombre o un tipo específico de recurso.
+   - *Ejemplo de uso:* Permitir el rol de `Storage Object Admin` solo en buckets cuyos nombres empiecen con el prefijo `public-`.
+
+3. **Niveles de Acceso (Access Levels - IP y Dispositivo):**
+   - Evalúa el contexto del solicitante mediante la integración con **Access Context Manager**. Puedes exigir que la solicitud provenga de una red IP corporativa o de un dispositivo seguro y corporativo.
+   - *Ejemplo de uso:* Un usuario solo puede acceder a BigQuery si se conecta a través de la VPN de la empresa.
+
+> [!TIP]
+> **Tip para el examen (PCA):**
+> Si el examen te pide dar acceso temporal, configurar "ventanas de mantenimiento" de permisos, o restringir permisos basados en el nombre de un bucket o la IP de origen, busca **IAM Conditions** o **Access Context Manager** en las opciones.
+
 ### Cloud Identity
 
 Cuando los equipos comienzan a usar Google Cloud, a menudo utilizan cuentas personales (como `@gmail.com`) y Grupos de Google convencionales. Sin embargo, esta estrategia presenta un gran desafío de seguridad y administración a nivel empresarial: **las identidades no se administran de manera centralizada**. Si un empleado abandona la organización, revocar su acceso de manera inmediata y completa es muy difícil y riesgoso.
