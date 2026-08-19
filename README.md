@@ -13,6 +13,7 @@ Para respaldar y validar mis conocimientos técnicos en la nube de Google, he ob
 
 | Certificación | Insignia | Credencial |
 | :--- | :---: | :---: |
+| **Google Cloud Certified - Professional Cloud Architect** | <a href="https://www.credly.com/badges/d5cf09bf-0304-4f72-9c8f-51cafa4907dc/public_url" target="_blank"><img src="image/certificaciones/professional-cloud-architect-certification.png" width="130" alt="Professional Cloud Architect"/></a> | [Verificar en Credly](https://www.credly.com/badges/d5cf09bf-0304-4f72-9c8f-51cafa4907dc/public_url) |
 | **Google Cloud Certified - Associate Cloud Engineer** | <a href="https://www.credly.com/badges/0ac27d14-74b4-49ea-bc84-3dc0883be183/public_url" target="_blank"><img src="image/certificaciones/associate-cloud-engineer-espanol.png" width="130" alt="Associate Cloud Engineer"/></a> | [Verificar en Credly](https://www.credly.com/badges/0ac27d14-74b4-49ea-bc84-3dc0883be183/public_url) |
 | **Google Cloud Computing Foundations Certificate** | <a href="https://www.credly.com/badges/a1895a28-3ab1-42a2-a380-dac4886e8bb7/public_url" target="_blank"><img src="image/certificaciones/google-cloud-computing-foundations-certificate.png" width="130" alt="Google Cloud Computing Foundations Certificate"/></a> | [Verificar en Credly](https://www.credly.com/badges/a1895a28-3ab1-42a2-a380-dac4886e8bb7/public_url) |
 
