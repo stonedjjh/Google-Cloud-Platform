@@ -8,8 +8,10 @@ Este directorio contiene la documentación de los servicios de red de Google Clo
 │   ├─ [direct-peering.md](./conectividad/direct-peering.md)
 │   ├─ [carrier-peering.md](./conectividad/carrier-peering.md)
 │   ├─ [conectividad-hibrida.md](./conectividad/conectividad-hibrida.md)
+│   ├─ [network-connectivity-center.md](./conectividad/network-connectivity-center.md)
 │   ├─ vpn/                # Classic VPN y HA VPN
-│   │   └─ [cloud-vpn.md](./conectividad/vpn/cloud-vpn.md)
+│   │   ├─ [cloud-vpn.md](./conectividad/vpn/cloud-vpn.md)
+│   │   └─ [ha-vpn-topologies.md](./conectividad/vpn/ha-vpn-topologies.md)
 │   └─ interconnect/       # Dedicated & Partner 
 │       ├─ [dedicated-interconnect.md](./conectividad/interconnect/dedicated-interconnect.md)
 │       ├─ [partner-interconnect.md](./conectividad/interconnect/partner-interconnect.md)
@@ -17,6 +19,8 @@ Este directorio contiene la documentación de los servicios de red de Google Clo
 │
 ├─ vpc/                  # Componentes internos de la VPC
 │   ├─ [VPC.md](./vpc/VPC.md)
+│   ├─ [shared-vpc.md](./vpc/shared-vpc.md)
+│   ├─ [vm-migration.md](./vpc/vm-migration.md)
 │   ├─ [subnetwork.md](./vpc/subnetwork.md)
 │   ├─ [firewall-rules.md](./vpc/firewall-rules.md)
 │   └─ [cloud-router.md](./vpc/cloud-router.md)

@@ -22,9 +22,16 @@ Por defecto, Cloud Router anuncia automáticamente todas las subredes de tu VPC 
 - Ocultar ciertas subredes de producción para que no sean visibles desde la oficina local.
 - Anunciar rangos de IP personalizados (como prefijos que representen a toda la VPC de forma agrupada) para optimizar las tablas del router local.
 
-### 3. Integración con Cloud NAT
+### 3. Prioridad Base de BGP (MED) y Costos Regionales
+Cloud Router te permite influir en la selección de la mejor ruta (como en escenarios Activo/Pasivo) mediante la **Prioridad Base** (que se asigna al atributo MED de BGP).
+- **Prioridad Base (0 a 65535):** La prioridad base predeterminada es **100**. Recuerda que en BGP, un número *menor* indica una *mayor* prioridad (mejor ruta).
+- **Costos de Región a Región:** Si tu red VPC está en modo de enrutamiento *Global*, Google Cloud suma automáticamente un costo adicional (de 201 a 9,999) a tu prioridad base. Este valor representa la distancia y latencia real (ej. el costo de ir de `europe-west1` a `us-central1` es menor que ir hasta `us-west1`). 
+    > [!WARNING]
+    > **Regla de Examen:** Google calcula y aplica estos costos de región a región automáticamente basándose en la topología física de su red. **Tú no puedes modificarlos ni anularlos**.
+
+### 4. Integración con Cloud NAT
 Cloud NAT es el servicio que permite a VMs sin IP pública salir a Internet de forma segura.
-- Cloud NAT no utiliza máquinas virtuales virtuales.
+- Cloud NAT no utiliza máquinas virtuales individuales.
 - En su lugar, requiere asociarse a un **Cloud Router** para que este actúe como el motor y gestor de enrutamiento que asigna las IPs de NAT a los recursos correspondientes.
 
 ---
